@@ -26,6 +26,12 @@
             scroll-behavior: smooth;
         }
         
+                .preloader {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.5s, opacity 0.5s linear;
+        }
+
         body {
             font-family: 'Lato', sans-serif;
             background-color: white;
@@ -261,6 +267,7 @@
         </div>
     </section>
 
+    <script src="js/main.js"></script>
     <script src="components/footer.js"></script>
     <script>
         // Your existing scripts

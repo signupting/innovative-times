@@ -22,6 +22,12 @@
             --nav-background: #203F58;
         }
         html { scroll-behavior: smooth; }
+                .preloader {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.5s, opacity 0.5s linear;
+        }
+
         body { font-family: 'Lato', sans-serif; background-color: white; color: #1F2937; }
         h1, h2, h3, h4, h5 { font-family: 'Lora', serif; font-weight: 700; }
         .article-body p { margin-bottom: 1.5rem; line-height: 1.75; font-size: 1.125rem; }
@@ -34,7 +40,7 @@
         .mobile-menu.active { transform: translateX(0); }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 preloader">
 
     <!-- Header Navigation -->
     <header class="header-nav py-4" x-data="{ open: false }">
@@ -136,6 +142,7 @@
     </main>
 
     <!-- Footer will be injected by footer.js -->
+    <script src="js/main.js"></script>
     <script src="components/footer.js"></script>
 </body>
 </html> 

@@ -27,6 +27,12 @@
             scroll-behavior: smooth;
         }
         
+                .preloader {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.5s, opacity 0.5s linear;
+        }
+
         body {
             font-family: 'Lato', sans-serif; /* New body font */
             background-color: white;
@@ -426,7 +432,7 @@
         });
     </script>
 </head>
-<body>
+<body class="preloader">
     <!-- Header Navigation -->
     <header class="header-nav py-4 bg-blue-800" x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
         <div class="container mx-auto px-4 md:px-8">
@@ -1037,6 +1043,7 @@
         </div>
     </div>
 
+    <script src="js/main.js"></script>
     <script src="components/footer.js"></script>
     <script>
         // Fade-in animation for sections

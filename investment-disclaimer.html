@@ -23,6 +23,12 @@
             --nav-background: #203F58;
         }
         
+                .preloader {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.5s, opacity 0.5s linear;
+        }
+
         body {
             font-family: 'Lato', sans-serif;
             background-color: white;
@@ -210,6 +216,7 @@
     </div>
 
     <!-- Footer will be inserted by footer.js -->
-    <script src="components/footer.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../components/footer.js"></script>
 </body>
-</html> 
+</html>
