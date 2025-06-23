@@ -1043,7 +1043,26 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('hero-video');
+            const body = document.body;
+
+            function showContent() {
+                body.classList.remove('preloader');
+                video.style.opacity = '1';
+            }
+
+            if (video) {
+                if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+                    showContent();
+                } else {
+                    video.addEventListener('canplaythrough', showContent, { once: true });
+                }
+            }
+        });
+    </script>
+    <script src="/js/main.js"></script>
     <script src="components/footer.js"></script>
     <script>
         // Fade-in animation for sections

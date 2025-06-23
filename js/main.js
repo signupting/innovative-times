@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const backgroundElement = document.querySelector('.relative.overflow-hidden');
     if (backgroundElement) {
         const image = backgroundElement.querySelector('img');
-        const video = backgroundElement.querySelector('video');
+        const video = backgroundElement.querySelector('video:not(#hero-video)');
 
         if (image) {
             if (image.complete) {
