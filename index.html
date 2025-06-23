@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Innovative Times - Elite Financial Media & EIS Investment Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    <link rel="preload" as="video" href="/assets/videos/hero-bg.mp4" type="video/mp4">
+    <style>
+        :root {
+            --primary-blue: #2563EB;
+            --light-blue: #60A5FA;
+            --dark-blue: #1E40AF;
+            --primary-teal: #0d9488;
+            --dark-teal: #0f766e;
+            --lightest-blue: #EFF6FF;
+            --off-white: #F9FAFB;
+            --nav-background: #203F58;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif; /* New body font */
+            background-color: white;
+            color: #1F2937;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Lora', serif; /* New heading font */
+            font-weight: 700;
+        }
+        
+        .text-highlight {
+            color: var(--light-blue);
+        }
+
+        .hero-text-shadow {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7); /* Shadow for readability */
+        }
+
+        .section-divider {
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-blue);
+            margin: 1rem auto;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue) !important;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(120deg, var(--primary-blue), var(--light-blue));
+        }
+        
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center; /* Vertically center content */
+            justify-content: flex-end; /* Align content to the right */
+            text-align: right; /* Align text to the right */
+            padding: 0 8%; /* Add some padding on the right */
+            overflow: hidden;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            will-change: opacity;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(25, 55, 80, 0.6);
+            z-index: 2;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-teal);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-blue);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1.5px solid var(--primary-blue);
+        }
+        
+        .btn-outline:hover {
+            background: var(--lightest-blue);
+            transform: translateY(-2px);
+        }
+        
+        .header-nav {
+            background: var(--nav-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .header-nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            color: white;
+            font-size: 1.125rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-link:hover {
+            color: #60A5FA;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #60A5FA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        .focus-card {
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .focus-card-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.8) 0%,
+                rgba(0, 0, 0, 0.4) 40%,
+                rgba(0, 0, 0, 0) 100%
+            );
+        }
+        
+        .focus-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .focus-card:hover .focus-card-bg {
+            transform: scale(1.05);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--light-blue);
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+            border: 3px solid white;
+        }
+        
+        .form-input {
+            border: 1px solid #E5E7EB;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+            outline: none;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(to right, var(--darker-blue), var(--primary-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--lightest-blue);
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            background: var(--primary-blue);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #1E40AF; /* Dark Blue */
+                z-index: 50;
+                display: flex;
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+            
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+        }
+
+        [id] {
+            scroll-margin-top: 6rem; 
+        }
+
+        /* Add spacing adjustments */
+        .screen-fit-section {
+            min-height: auto !important;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .section-divider {
+            margin: 0.5rem auto;
+        }
+
+        .mb-8 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .py-16 {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            .mb-10 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu .nav-link {
+            color: white;
+            font-size: 1.125rem;
+            padding: 0.75rem 1rem;
+            display: block;
+            width: 100%;
+        }
+
+        /* Desktop navigation container */
+        .desktop-nav {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+
+        .success-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #10B981;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('hero-video');
+            
+            // Ensure video is ready to play
+            Promise.all([
+                video.play().catch(function(error) {
+                    console.log("Video play failed:", error);
+                })
+            ]);
+
+            // Handle video loading
+            video.addEventListener('loadeddata', function() {
+                video.style.opacity = '1';
+            });
+
+            // Handle any errors
+            video.addEventListener('error', function(e) {
+                console.error("Error during video loading:", e);
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header-nav py-4 bg-blue-800" x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="/assets/images/nav-logo.png" alt="The Innovative Times Logo" class="h-12 w-auto mr-3 object-contain">
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">
+                        <span>The Innovative Times</span>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="eis-explained.html" class="nav-link">What is EIS</a>
+                    <a href="community.html" class="nav-link">Community</a>
+                    <a href="insights.html" class="nav-link">Insights</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button @click="open = !open" class="md:hidden focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div x-show="open" class="md:hidden mobile-menu" :class="{'active': open}" @click.away="open = false">
+            <div class="flex justify-end mb-8">
+                <button @click="open = false" class="focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <a href="index.html" class="nav-link" @click="open = false">Home</a>
+                <a href="about.html" class="nav-link" @click="open = false">About</a>
+                <a href="eis-explained.html" class="nav-link" @click="open = false">What is EIS</a>
+                <a href="community.html" class="nav-link" @click="open = false">Community</a>
+                <a href="insights.html" class="nav-link" @click="open = false">Insights</a>
+                <a href="contact.html" class="nav-link" @click="open = false">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <video 
+            id="hero-video"
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            preload="auto"
+            poster="/assets/images/bg3.jpg">
+            <source src="/assets/videos/hero-bg.mp4" type="video/mp4">
+        </video>
+        <div class="relative z-30" style="margin-bottom: 10vh;"> <!-- Move content up -->
+            <div class="max-w-3xl">
+                <h1 class="text-5xl md:text-7xl font-bold text-white hero-text-shadow leading-tight mb-6">
+                    Connecting <span class="text-highlight">High-Net-Worth Investors</span> with EIS Investment Opportunities
+                </h1>
+                <div class="w-full flex justify-end">
+                    <div class="w-2/3 h-1 bg-white my-4 rounded-full opacity-50"></div>
+                </div>
+                <p class="mt-6 text-2xl md:text-3xl text-gray-100 hero-text-shadow font-light">
+                    Introducing Investors to Innovators
+                </p>
+                <div class="mt-12 flex flex-col sm:flex-row sm:justify-end gap-5">
+                    <a href="community.html" class="btn-primary text-lg">
+                        Join our Investor Community <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="eis-explained.html" class="btn-primary bg-opacity-20 backdrop-blur-sm border border-white text-white hover:bg-opacity-30 text-lg">
+                        Learn About EIS <i class="fas fa-info-circle ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="/assets/images/about-bg.jpg" alt="Background" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-blue-900 bg-opacity-70"></div>
+        </div>
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-left md:text-center mb-8">
+
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 relative inline-block">
+                    About The Innovative Times
+                    <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-400 mt-3 md:mx-auto"></div>
+                </h2>
+                <p class="mt-4 text-gray-200 max-w-2xl md:mx-auto">
+                    Connecting visionary entrepreneurs with forward-thinking investors to drive innovation and growth in the UK's startup ecosystem.
+                </p>
+            </div>
+
+            <!-- Main content with asymmetrical layout -->
+            <div class="flex flex-col md:flex-row gap-8 mt-8">
+                <!-- Left column - Our Story (larger) -->
+                <div class="md:w-7/12">
+                    <div class="bg-white p-7 rounded-lg shadow-md border-l-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative overflow-hidden group">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-b from-blue-50 to-transparent opacity-40 rounded-full transform transition-all duration-500 group-hover:scale-150"></div>
+
+                        
+                        <div class="flex items-center mb-5">
+                            <div class="flex items-center justify-center w-14 h-14 rounded-full bg-teal-100 mr-4">
+                                <i class="fas fa-landmark text-xl text-teal-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-teal-600 relative">
+                                Our Story
+                                <div class="h-0.5 w-16 bg-blue-400 mt-1 mx-auto"></div>
+                            </h3>
+                        </div>
+                        
+                        <p class="text-blue-900 relative z-10 text-lg mb-2">
+                            Our journey began with a simple question:
+                        </p>
+                        <p class="text-lg font-medium text-blue-700 italic mb-4 pl-4 border-l-2 border-blue-400">
+                            What if raising funds for a cause didn't have to be so difficult?
+                        </p>
+                        <p class="text-blue-900 relative z-10">
+                            We saw passionate individuals struggling to bring their visions to life—not because they lacked purpose, but because they lacked funding and support. The Innovative Times was created to bridge this gap, connecting those with innovative ideas to the resources they need to succeed.
+                        </p>
+                        
+                        <div class="mt-6 flex items-center p-3 bg-blue-50 bg-opacity-50 rounded-lg">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 mr-3">
+                                <i class="fas fa-handshake-simple text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal-600 relative inline-block">
+                                    Trust & Transparency
+                                    <div class="h-0.5 w-10 bg-blue-400 mt-1 mx-auto"></div>
+                                </h4>
+                                <p class="text-blue-900 text-sm">
+                                    Building relationships based on honesty and clear communication.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex items-center p-3 bg-blue-50 bg-opacity-50 rounded-lg">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 mr-3">
+                                <i class="fas fa-people-group text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal-600 relative inline-block">
+                                    Community Growth
+                                    <div class="h-0.5 w-10 bg-blue-400 mt-1 mx-auto"></div>
+                                </h4>
+                                <p class="text-blue-900 text-sm">
+                                    Fostering a supportive ecosystem where entrepreneurs and investors thrive together.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right column - Mission and Vision (stacked) -->
+                <div class="md:w-5/12 flex flex-col gap-8">
+                    <!-- Our Mission -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-r-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-transparent opacity-40 rounded-tr-full"></div>
+
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 mr-4">
+                                <i class="fas fa-crosshairs text-teal-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-teal-600 relative">
+                                Our Mission
+                                <div class="h-0.5 w-12 bg-blue-400 mt-1 mx-auto"></div>
+                            </h3>
+                        </div>
+                        
+                        <p class="text-blue-900 relative z-10">
+                            To empower individuals and organizations to raise funds with confidence, creativity, and community — helping them turn ideas into impact through innovative tools and expert support.
+                        </p>
+                        
+                        <div class="flex mt-4 gap-2">
+                            <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i> Innovation
+                            </span>
+                            <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i> Support
+                            </span>
+                            <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i> Growth
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Our Vision -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative overflow-hidden group">
+                        <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-tl from-blue-50 to-transparent opacity-40 rounded-full"></div>
+
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 mr-4">
+                                <i class="fas fa-binoculars text-teal-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-teal-600 relative">
+                                Our Vision
+                                <div class="h-0.5 w-12 bg-blue-400 mt-1 mx-auto"></div>
+                            </h3>
+                        </div>
+                        
+                        <p class="text-blue-900 relative z-10">
+                            To grow a community of like-minded innovestors to ensure innovative technology doesn't go unfunded and provide support from inception through to development.
+                        </p>
+                        
+                        <div class="mt-5 flex items-center bg-blue-50 p-2 rounded-lg">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 mr-3">
+                                <i class="fas fa-lightbulb text-teal-600"></i>
+                            </div>
+                            <p class="text-blue-600 font-medium text-sm relative z-10">
+                                Championing creative solutions and forward-thinking approaches
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="min-h-screen flex items-center py-20 bg-gradient-to-br from-gray-50 to-blue-100">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3 relative inline-block">
+                    Meet the Team
+                    <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-400 mx-auto mt-3"></div>
+                </h2>
+                <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+                    Our dedicated team brings together expertise in finance, technology, and entrepreneurship to drive innovation forward.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col border-t-4 border-blue-500 transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div class="relative w-32 h-32 mx-auto mb-5">
+                        <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-400 text-5xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-1">Firstname Lastname</h3>
+                    <p class="text-blue-600 font-semibold text-md mb-4">Founder & CEO</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">
+                        Expert in financial markets with 15+ years experience in venture capital and startup ecosystems. John is passionate about connecting innovative ideas with the right investors to foster growth and create lasting impact.
+                    </p>
+                    <div class="flex justify-center mt-auto space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col border-t-4 border-blue-500 transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div class="relative w-32 h-32 mx-auto mb-5">
+                        <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-400 text-5xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-1">Firstname Lastname</h3>
+                    <p class="text-blue-600 font-semibold text-md mb-4">Chief Technology Officer</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">
+                        A seasoned technology leader with extensive experience building scalable and secure platforms. Jane previously led development teams at several successful fintech startups.
+                    </p>
+                    <div class="flex justify-center mt-auto space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col border-t-4 border-blue-500 transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div class="relative w-32 h-32 mx-auto mb-5">
+                        <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-400 text-5xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-1">Firstname Lastname</h3>
+                    <p class="text-blue-600 font-semibold text-md mb-4">Chief Investment Officer</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">
+                        Investment strategist specializing in early-stage ventures with deep expertise in EIS/SEIS frameworks and regulatory compliance for UK startups.
+                    </p>
+                    <div class="flex justify-center mt-auto space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EIS Benefits Section -->
+    <section id="eis-info" class="min-h-screen flex items-center bg-gradient-to-b from-gray-50 to-blue-100">
+        <div class="container mx-auto px-4 md:px-8 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Invest in the Enterprise Investment Scheme (EIS)?</h2>
+                <div class="section-divider"></div>
+                <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+                    The EIS is designed to help smaller, higher-risk companies raise finance by offering a range of tax reliefs to investors who purchase new shares in those companies.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Benefit 1: Income Tax Relief -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-t-4 border-blue-500">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full mb-6 text-2xl">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">30% Income Tax Relief</h3>
+                    <p class="text-gray-600">Claim up to £300,000 income tax relief per year on investments up to £1 million.</p>
+                </div>
+                <!-- Benefit 2: Tax-Free Growth -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-t-4 border-green-500">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 text-green-600 rounded-full mb-6 text-2xl">
+                        <i class="fas fa-pound-sign"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tax-Free Growth</h3>
+                    <p class="text-gray-600">No Capital Gains Tax on profits from the sale of shares after they have been held for three years.</p>
+                </div>
+                <!-- Benefit 3: Inheritance Tax Relief -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-t-4 border-purple-500">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-purple-100 text-purple-600 rounded-full mb-6 text-2xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Inheritance Tax Relief</h3>
+                    <p class="text-gray-600">After two years, EIS shares are typically exempt from Inheritance Tax.</p>
+                </div>
+                <!-- Benefit 4: Loss Protection -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-t-4 border-red-500">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 text-red-600 rounded-full mb-6 text-2xl">
+                        <i class="fas fa-umbrella"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Loss Protection</h3>
+                    <p class="text-gray-600">Offset losses against your income tax bill if the company you invest in fails.</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="eis-explained.html" class="btn-primary text-xl py-4 px-8 rounded-lg shadow-lg hover:shadow-xl inline-flex items-center">
+                    Learn more about EIS & SEIS investments <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="min-h-screen py-20 bg-gradient-to-br from-gray-50 to-blue-100">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">A Community of Innovators and Investors</h2>
+                <div class="section-divider"></div>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">We connect the brightest minds in UK startups with the forward-thinking investors who can help them grow.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- Investors Column with Form -->
+                <div id="investors" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-800 text-center mb-4">For Investors</h3>
+                    <p class="text-gray-600 text-center mb-4 text-sm">Join our network of investors and get access to curated investment opportunities.</p>
+                    <form id="investor-form" action="https://formsubmit.co/26760506cb8b22896adf15eed6c1bc1a" method="POST" class="space-y-2">
+                        <input type="hidden" name="_subject" value="New Investor Application">
+                        <input type="hidden" name="_captcha" value="false">
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="name-invest">Full Name</label>
+                            <input type="text" id="name-invest" name="name" class="form-input" placeholder="Your full name" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="email-invest">Email</label>
+                            <input type="email" id="email-invest" name="email" class="form-input" placeholder="you@example.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="investment-type">Investment Interest</label>
+                            <select id="investment-type" name="investment_type" class="form-input" required>
+                                <option value="">Select investment type</option>
+                                <option value="EIS">EIS Investments</option>
+                                <option value="SEIS">SEIS Investments</option>
+                                <option value="Both">Both EIS & SEIS</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="message-invest">Additional Information</label>
+                            <textarea id="message-invest" name="message" rows="2" class="form-input" placeholder="Tell us about your investment interests and experience" required></textarea>
+                        </div>
+                        <div class="pt-1">
+                            <button type="submit" class="btn-primary w-full">Become an Investor</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Entrepreneurs Column with Form -->
+                <div id="entrepreneurs" class="bg-white p-5 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-800 text-center mb-4">For Entrepreneurs</h3>
+                    <p class="text-gray-600 text-center mb-4 text-sm">Ready to take the next step? Submit your startup for consideration.</p>
+                    <form id="startup-form" action="https://formsubmit.co/26760506cb8b22896adf15eed6c1bc1a" method="POST" class="space-y-2">
+                        <input type="hidden" name="_subject" value="New Startup Submission">
+                        <input type="hidden" name="_captcha" value="false">
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="company-name-submit">Company Name</label>
+                            <input type="text" id="company-name-submit" name="company" class="form-input" placeholder="Your company name" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="email-submit">Email</label>
+                            <input type="email" id="email-submit" name="email" class="form-input" placeholder="you@example.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="sector-submit">Sector</label>
+                            <select id="sector-submit" name="sector" class="form-input" required>
+                                <option value="">Select a sector</option>
+                                <option value="AI">Artificial Intelligence</option>
+                                <option value="Sustainability">Sustainability</option>
+                                <option value="FinTech">FinTech</option>
+                                <option value="HealthTech">HealthTech</option>
+                                <option value="NextGen">Next-Gen Technology</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1 font-medium text-sm" for="message-submit">Brief Description</label>
+                            <textarea id="message-submit" name="message" rows="2" class="form-input" placeholder="Tell us about your startup and investment needs" required></textarea>
+                        </div>
+                        <div class="pt-1">
+                            <button type="submit" class="btn-primary w-full">Submit Your Startup</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Insights -->
+    <section id="insights" class="py-20 bg-gradient-to-b from-gray-50 to-blue-100">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">News & Insights</h2>
+                <div class="section-divider"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Stay informed with the latest developments, trends, and opportunities in the EIS and startup ecosystem.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card fade-in">
+                    <img class="h-48 w-full object-cover" src="https://c.pxhere.com/images/56/ba/951725629e801f44c6938c1aa4a3-1584335.jpg!d" alt="Businessman walking up a stack of coins representing financial growth">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="text-sm text-gray-500 mr-4">
+                                <i class="far fa-calendar-alt mr-1"></i> May 28, 2025
+                            </span>
+                            <span class="text-sm text-purple-600 font-semibold">
+                                <i class="fas fa-tag mr-1"></i> SEIS
+                            </span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">SEIS Investment Skyrockets 51% After Rule Changes</h3>
+                        <p class="text-gray-600 text-base mb-4">New HMRC data reveals a massive 51% surge in SEIS funding for the 23/24 tax year, showing an immediate and powerful investor response to increased investment limits.</p>
+                        <a href="article-seis-skyrockets.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Article 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Abstract technology network">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Navigating the 2025 EIS Landscape: Why Tech Still Leads</h3>
+                        <p class="text-gray-600 text-sm mb-3">May 25, 2025</p>
+                        <p class="text-gray-700 mb-4">A new report shows that despite a 20% dip in overall EIS funding last tax year, the technology sector continues to attract nearly half of all investment.</p>
+                        <a href="article-eis-landscape.html" class="font-semibold text-teal-600 hover:text-teal-700 transition duration-300">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Article 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" alt="Business professionals looking at charts">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">A Sober Look at UK Venture Capital in 2025</h3>
+                        <p class="text-gray-600 text-sm mb-3">May 22, 2025</p>
+                        <p class="text-gray-700 mb-4">VC funding is down, but deals are getting smarter. Experts analyze the flight to quality and what it means for founders and investors in the coming year.</p>
+                        <a href="article-market-analysis-2025.html" class="font-semibold text-teal-600 hover:text-teal-700 transition duration-300">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <a href="insights.html" class="btn-primary inline-flex items-center">
+                    View All Insights <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="mt-16 bg-blue-50 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between fade-in">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                    <h3 class="text-2xl font-bold mb-2">Stay Informed</h3>
+                    <p class="text-gray-600">
+                        Subscribe to our newsletter for exclusive EIS insights and opportunities delivered to your inbox.
+                    </p>
+                </div>
+                <div class="w-full md:w-auto">
+                    <div class="flex flex-col sm:flex-row">
+                        <input type="email" placeholder="Enter your email" class="form-input rounded-l-md sm:rounded-r-none mb-2 sm:mb-0">
+                        <button class="btn-primary rounded-r-md sm:rounded-l-none whitespace-nowrap">
+                            Subscribe Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-blue-50">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
+                <div class="section-divider"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Have questions or want to learn more about our platform? Get in touch with our team today.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg md:col-span-3 fade-in">
+                    <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+                    <form id="contact-form" action="https://formsubmit.co/26760506cb8b22896adf15eed6c1bc1a" method="POST" class="space-y-4">
+                        <input type="hidden" name="_subject" value="New Contact Form Submission">
+                        <input type="hidden" name="_captcha" value="false">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2 font-medium">Name</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2 font-medium">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 mb-2 font-medium">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="What's this about?" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2 font-medium">Message</label>
+                            <textarea id="message" name="message" rows="4" class="form-input" placeholder="Your message" required></textarea>
+                        </div>
+                        <div class="pt-2">
+                            <button type="submit" class="btn-primary w-full">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="md:col-span-2 fade-in">
+                    <div class="bg-white rounded-xl p-8 shadow-lg mb-6">
+                        <div class="flex flex-col items-center justify-center mb-8">
+                            <div class="w-48 h-48 bg-blue-50 rounded-full flex items-center justify-center p-4 mb-6">
+                                <img src="/assets/images/logo.jpg" alt="The Innovative Times Logo" class="w-full h-full object-contain">
+                            </div>
+                            <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full mb-6"></div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Contact Information</h3>
+                            <p class="text-gray-600 text-center">We're here to help and answer any questions you might have</p>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center p-4 bg-blue-50 rounded-lg transition-all duration-300 hover:bg-blue-100">
+                                <div class="bg-white p-3 rounded-full mr-4 shadow-sm">
+                                    <i class="fas fa-envelope text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Email Us</h4>
+                                    <p class="text-blue-600">info@theinnovativetimes.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Connect With Us</h3>
+                        <div class="flex justify-center space-x-6">
+                            <a href="#" class="transform transition-all duration-300 hover:scale-110">
+                                <div class="w-12 h-12 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fab fa-twitter text-blue-600 text-xl"></i>
+                                </div>
+                            </a>
+                            <a href="#" class="transform transition-all duration-300 hover:scale-110">
+                                <div class="w-12 h-12 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fab fa-linkedin-in text-blue-600 text-xl"></i>
+                                </div>
+                            </a>
+                            <a href="#" class="transform transition-all duration-300 hover:scale-110">
+                                <div class="w-12 h-12 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fab fa-instagram text-blue-600 text-xl"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="success-popup" class="success-popup">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span>Thank you! Your submission has been received.</span>
+        </div>
+    </div>
+
+    <script src="components/footer.js"></script>
+    <script>
+        // Fade-in animation for sections
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+
+                if (isVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            // Get all links that should trigger smooth scroll
+            const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+            
+            // Add smooth scroll behavior to all internal links
+            smoothScrollLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return; // Skip if href is just "#"
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (!targetElement) return; // Skip if target element doesn't exist
+                    
+                    // Get header height
+                    const headerHeight = document.querySelector('.header-nav').offsetHeight;
+                    
+                    // Calculate position
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                    
+                    // Smooth scroll to target
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            menuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+        
+        // Check elements on initial load and on scroll
+        window.addEventListener('load', checkFade);
+        window.addEventListener('scroll', checkFade);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = ['investor-form', 'startup-form', 'contact-form'];
+            const successPopup = document.getElementById('success-popup');
+
+            forms.forEach(formId => {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        // Don't prevent default - let the form submit normally
+                        
+                        // Show success message
+                        successPopup.style.display = 'block';
+                        
+                        // Hide after 5 seconds
+                        setTimeout(() => {
+                            successPopup.style.display = 'none';
+                        }, 5000);
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

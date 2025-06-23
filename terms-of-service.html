@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - The Innovative Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="legal-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    <style>
+        :root {
+            --primary-blue: #2563EB;
+            --light-blue: #60A5FA;
+            --dark-blue: #1E40AF;
+            --primary-teal: #0d9488;
+            --dark-teal: #0f766e;
+            --lightest-blue: #EFF6FF;
+            --off-white: #F9FAFB;
+            --nav-background: #203F58;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: white;
+            color: #1F2937;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+        }
+
+        .header-nav {
+            background: var(--nav-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-blue) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #1E40AF;
+                z-index: 50;
+                display: flex;
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header-nav py-4 bg-blue-800" x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">
+                        <a href="ino-times.html">The Innovative Times</a>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="ino-times.html" class="nav-link font-medium">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="eis-explained.html" class="nav-link">What is EIS</a>
+                    <a href="community.html" class="nav-link">Community</a>
+                    <a href="insights.html" class="nav-link font-medium text-blue-300">Insights</a>
+                    <a href="contact.html" class="nav-link font-medium">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button @click="open = !open" class="md:hidden focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div x-show="open" class="md:hidden mobile-menu" :class="{'active': open}" @click.away="open = false">
+            <div class="flex justify-end mb-8">
+                <button @click="open = false" class="focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <a href="ino-times.html" class="text-lg font-medium text-white" @click="open = false">Home</a>
+                <a href="about.html" class="text-lg font-medium text-white" @click="open = false">About</a>
+                <a href="eis-explained.html" class="text-lg font-medium text-white" @click="open = false">What is EIS</a>
+                <a href="community.html" class="text-lg font-medium text-white" @click="open = false">Community</a>
+                <a href="insights.html" class="text-lg font-medium text-white" @click="open = false">Insights</a>
+                <a href="contact.html" class="text-lg font-medium text-white" @click="open = false">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="legal-container">
+        <h1>Terms of Service</h1>
+        
+        <div class="section">
+            <p>Last updated: May 2025</p>
+            <p>Please read these Terms of Service carefully before using The Innovative Times website.</p>
+        </div>
+
+        <div class="section">
+            <h2>Acceptance of Terms</h2>
+            <p>By accessing or using our website, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, please do not use our website.</p>
+        </div>
+
+        <div class="section">
+            <h2>Investment Information</h2>
+            <div class="warning">
+                <p>The information provided on this website is for general informational purposes only and does not constitute financial advice. All investment decisions should be made in consultation with qualified financial advisors.</p>
+            </div>
+            <p>Our content about EIS and SEIS investments is intended to educate and inform, but should not be considered as personal investment recommendations.</p>
+        </div>
+
+        <div class="section">
+            <h2>User Responsibilities</h2>
+            <p>When using our website, you agree to:</p>
+            <ul>
+                <li>Provide accurate and complete information</li>
+                <li>Use the website in compliance with all applicable laws</li>
+                <li>Not interfere with the website's security features</li>
+                <li>Not use the website for unauthorized commercial purposes</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Intellectual Property</h2>
+            <p>All content on this website, including text, graphics, logos, and images, is the property of The Innovative Times and is protected by copyright laws.</p>
+        </div>
+
+        <div class="section">
+            <h2>Limitation of Liability</h2>
+            <p>The Innovative Times shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the website.</p>
+        </div>
+
+        <div class="section">
+            <h2>Changes to Terms</h2>
+            <p>We reserve the right to modify these terms at any time. We will notify users of any material changes by posting the updated terms on this website.</p>
+        </div>
+
+        <div class="section">
+            <h2>Contact Information</h2>
+            <p>For questions about these Terms of Service, please contact us at:</p>
+            <p>Email: info@theinnovativetimes.com</p>
+        </div>
+    </div>
+
+    <!-- Footer will be inserted by footer.js -->
+    <script src="components/footer.js"></script>
+</body>
+</html> 

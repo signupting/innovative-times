@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Innovative Times - Insights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    <style>
+        :root {
+            --primary-blue: #2563EB;
+            --light-blue: #60A5FA;
+            --dark-blue: #1E40AF;
+            --primary-teal: #0d9488;
+            --dark-teal: #0f766e;
+            --lightest-blue: #EFF6FF;
+            --off-white: #F9FAFB;
+            --nav-background: #203F58;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Lato', sans-serif; background-color: white; color: #1F2937; }
+        h1, h2, h3, h4, h5 { font-family: 'Lora', serif; font-weight: 700; }
+        .section-divider { width: 100px; height: 4px; background-color: var(--primary-blue); margin: 1rem auto; }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+        .header-nav { background: var(--nav-background); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; transition: all 0.3s ease; }
+        .nav-link { position: relative; transition: all 0.3s ease; color: white; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: linear-gradient(to right, var(--primary-blue), var(--light-blue)); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .mobile-menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #1E40AF; z-index: 50; display: flex; flex-direction: column; padding: 2rem; transform: translateX(-100%); transition: transform 0.3s ease; }
+        .mobile-menu.active { transform: translateX(0); }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Navigation -->
+    <header class="header-nav py-4" x-data="{ open: false }">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">
+                        <span>The Innovative Times</span>
+                    </h1>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="eis-explained.html" class="nav-link">What is EIS</a>
+                    <a href="community.html" class="nav-link">Community</a>
+                    <a href="insights.html" class="nav-link font-medium text-blue-300">Insights</a>
+                    <a href="contact.html" class="nav-link font-medium">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button @click="open = !open" class="md:hidden focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div x-show="open" class="md:hidden mobile-menu" :class="{'active': open}" @click.away="open = false">
+            <div class="flex justify-end mb-8">
+                <button @click="open = false" class="focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6 text-white items-center">
+                <a href="ino-times.html#home" class="text-lg font-medium" @click="open = false">Home</a>
+                <a href="about.html" class="text-lg font-medium" @click="open = false">About</a>
+                <a href="eis-explained.html" class="text-lg font-medium" @click="open = false">What is EIS</a>
+                <a href="ino-times.html#community" class="text-lg font-medium" @click="open = false">Community</a>
+                <a href="insights.html" class="text-lg font-medium text-blue-300" @click="open = false">Insights</a>
+                <a href="ino-times.html#contact" class="text-lg font-medium" @click="open = false">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-0">
+        <section id="insights-archive" class="py-20 bg-gradient-to-br from-gray-50 to-blue-100">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Latest Insights</h1>
+                    <div class="section-divider"></div>
+                    <p class="text-lg text-gray-600 max-w-5xl mx-auto">
+                        Your source for the latest analysis on the UK startup ecosystem, investment trends, and venture capital.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Article 1 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
+                        <img class="h-48 w-full object-cover" src="https://c.pxhere.com/images/56/ba/951725629e801f44c6938c1aa4a3-1584335.jpg!d" alt="Businessman walking up a stack of coins representing financial growth">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> May 28, 2025</span>
+                                <span class="text-sm text-purple-600 font-semibold"><i class="fas fa-tag mr-1"></i> SEIS</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">SEIS Investment Skyrockets 51% After Rule Changes</h3>
+                            <p class="text-gray-600 text-base mb-4">New HMRC data reveals a massive 51% surge in SEIS funding for the 23/24 tax year, showing an immediate and powerful investor response to increased investment limits.</p>
+                            <a href="article-seis-skyrockets.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Article 2 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
+                        <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Abstract technology network representing the UK's tech landscape">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> May 25, 2025</span>
+                                <span class="text-sm text-blue-600 font-semibold"><i class="fas fa-tag mr-1"></i> EIS</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">Navigating the 2025 EIS Landscape: Why Tech Still Leads</h3>
+                            <p class="text-gray-600 text-base mb-4">Despite a 20% dip in overall EIS funding, the tech sector remains the dominant force, attracting nearly half of all investment. Discover the key verticals drawing capital.</p>
+                             <a href="article-eis-landscape.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Article 3 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
+                        <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" alt="Business professionals looking at charts on a screen">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> May 22, 2025</span>
+                                <span class="text-sm text-red-600 font-semibold"><i class="fas fa-tag mr-1"></i> Market Analysis</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">A Sober Look at UK Venture Capital in 2025</h3>
+                            <p class="text-gray-600 text-base mb-4">While SEIS thrives, the broader venture market faces headwinds. Higher interest rates and economic uncertainty are creating a more cautious investment environment.</p>
+                            <a href="article-market-analysis-2025.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 4 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
+                        <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?q=80&w=2070&auto=format&fit=crop" alt="Abstract 3D render of financial data analysis and charts">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> June 16, 2025</span>
+                                <span class="text-sm text-green-600 font-semibold"><i class="fas fa-tag mr-1"></i> FinTech</span>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">Quality Over Quantity: The New Face of UK FinTech Investment</h3>
+                            <p class="text-gray-600 text-base mb-4">While total funding has dipped, the UK FinTech sector is maturing. Investors are now making fewer, larger bets on established scale-ups with clear paths to profitability.</p>
+                            <a href="article-fintech-investment.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder 1 -->
+                    <div class="bg-gray-100 rounded-lg shadow-md flex items-center justify-center h-full min-h-[400px] border-2 border-dashed">
+                        <div class="text-center text-gray-400">
+                            <i class="fas fa-plus-circle text-4xl mb-2"></i>
+                            <p class="font-semibold">More Insights Coming Soon</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Placeholder 2 -->
+                    <div class="bg-gray-100 rounded-lg shadow-md flex items-center justify-center h-full min-h-[400px] border-2 border-dashed">
+                        <div class="text-center text-gray-400">
+                            <i class="fas fa-plus-circle text-4xl mb-2"></i>
+                            <p class="font-semibold">More Insights Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Ready to Join Our Community?</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                    Whether you're an investor looking for the next big thing or an entrepreneur ready to change the world, we want to hear from you.
+                </p>
+                <a href="ino-times.html#contact" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white" style="background-color: var(--primary-teal);">
+                    Get in Touch <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be injected by footer.js -->
+    <script src="components/footer.js"></script>
+</body>
+</html> 

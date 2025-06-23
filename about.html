@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - The Innovative Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    <style>
+        :root {
+            --primary-blue: #2563EB;
+            --light-blue: #60A5FA;
+            --dark-blue: #1E40AF;
+            --primary-teal: #0d9488;
+            --dark-teal: #0f766e;
+            --lightest-blue: #EFF6FF;
+            --off-white: #F9FAFB;
+            --nav-background: #203F58;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: white;
+            color: #1F2937;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+        }
+
+        .header-nav {
+            background: var(--nav-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-blue) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .section-divider {
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-blue);
+            margin: 1rem auto;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #1E40AF;
+                z-index: 50;
+                display: flex;
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+        }
+
+        /* Adjust spacing between sections */
+        .py-16 {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+
+        .mb-12 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mt-8 {
+            margin-top: 1rem !important;
+        }
+
+        .gap-8 {
+            gap: 1rem !important;
+        }
+
+        @media (max-width: 768px) {
+            .py-16 {
+                padding-top: 1.5rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+            .mb-12 {
+                margin-bottom: 1rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header-nav py-4 bg-blue-800" x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">
+                        <a href="index.html">The Innovative Times</a>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="eis-explained.html" class="nav-link">What is EIS</a>
+                    <a href="community.html" class="nav-link">Community</a>
+                    <a href="insights.html" class="nav-link font-medium text-blue-300">Insights</a>
+                    <a href="contact.html" class="nav-link font-medium">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button @click="open = !open" class="md:hidden focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div x-show="open" class="md:hidden mobile-menu" :class="{'active': open}" @click.away="open = false">
+            <div class="flex justify-end mb-8">
+                <button @click="open = false" class="focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <a href="index.html" class="text-lg font-medium text-white" @click="open = false">Home</a>
+                <a href="about.html" class="text-lg font-medium text-white" @click="open = false">About</a>
+                <a href="eis-explained.html" class="text-lg font-medium text-white" @click="open = false">What is EIS</a>
+                <a href="ino-times.html#community" class="text-lg font-medium text-white" @click="open = false">Community</a>
+                <a href="insights.html" class="text-lg font-medium text-white" @click="open = false">Insights</a>
+                <a href="contact.html" class="text-lg font-medium text-white" @click="open = false">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="py-12 min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="/assets/images/about-bg.jpg" alt="Background" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-blue-900 bg-opacity-70"></div>
+        </div>
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-left md:text-center mb-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 relative inline-block">
+                    About The Innovative Times
+                    <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-400 mt-2 md:mx-auto"></div>
+                </h2>
+                <p class="mt-2 text-gray-200 max-w-2xl md:mx-auto">
+                    Connecting visionary entrepreneurs with forward-thinking investors to drive innovation and growth in the UK's startup ecosystem.
+                </p>
+            </div>
+
+            <!-- Main content with asymmetrical layout -->
+            <div class="flex flex-col md:flex-row gap-6 mt-4">
+                <!-- Left column - Our Story (larger) -->
+                <div class="md:w-7/12">
+                    <div class="bg-white p-7 rounded-lg shadow-md border-l-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative overflow-hidden group">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-b from-blue-50 to-transparent opacity-40 rounded-full transform transition-all duration-500 group-hover:scale-150"></div>
+                        
+                        <div class="flex items-center mb-5">
+                            <div class="flex items-center justify-center w-14 h-14 rounded-full bg-teal-100 mr-4">
+                                <i class="fas fa-landmark text-xl text-teal-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-teal-600 relative">
+                                Our Story
+                                <div class="h-0.5 w-16 bg-blue-400 mt-1 mx-auto"></div>
+                            </h3>
+                        </div>
+                        
+                        <p class="text-blue-900 relative z-10 text-lg mb-2">
+                            Our journey began with a simple question:
+                        </p>
+                        <p class="text-lg font-medium text-blue-700 italic mb-4 pl-4 border-l-2 border-blue-400">
+                            What if raising funds for a cause didn't have to be so difficult?
+                        </p>
+                        <p class="text-blue-900 relative z-10">
+                            We saw passionate individuals struggling to bring their visions to life—not because they lacked purpose, but because they lacked funding and support. The Innovative Times was created to bridge this gap, connecting those with innovative ideas to the resources they need to succeed.
+                        </p>
+                        
+                        <div class="mt-6 flex items-center p-3 bg-blue-50 bg-opacity-50 rounded-lg">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 mr-3">
+                                <i class="fas fa-handshake-simple text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal-600 relative inline-block">
+                                    Trust & Transparency
+                                    <div class="h-0.5 w-10 bg-blue-400 mt-1 mx-auto"></div>
+                                </h4>
+                                <p class="text-blue-900 text-sm">
+                                    Building relationships based on honesty and clear communication.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex items-center p-3 bg-blue-50 bg-opacity-50 rounded-lg">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 mr-3">
+                                <i class="fas fa-people-group text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal-600 relative inline-block">
+                                    Community Growth
+                                    <div class="h-0.5 w-10 bg-blue-400 mt-1 mx-auto"></div>
+                                </h4>
+                                <p class="text-blue-900 text-sm">
+                                    Fostering a supportive ecosystem where entrepreneurs and investors thrive together.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right column - Mission and Vision (stacked) -->
+                <div class="md:w-5/12 flex flex-col gap-8">
+                    <!-- Our Mission -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-r-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-transparent opacity-40 rounded-tr-full"></div>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 mr-4">
+                                <i class="fas fa-crosshairs text-teal-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-teal-600 relative">
+                                Our Mission
+                                <div class="h-0.5 w-12 bg-blue-400 mt-1 mx-auto"></div>
+                            </h3>
+                        </div>
+                        
+                        <p class="text-blue-900 relative z-10">
+                            To empower individuals and organizations to raise funds with confidence, creativity, and community — helping them turn ideas into impact through innovative tools and expert support.
+                        </p>
+                        
+                        <div class="flex mt-4 gap-2">
+                            <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i> Innovation
+                            </span>
+                            <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i> Support
+                            </span>
+                            <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i> Growth
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Our Vision -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative overflow-hidden group">
+                        <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-tl from-blue-50 to-transparent opacity-40 rounded-full"></div>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 mr-4">
+                                <i class="fas fa-binoculars text-teal-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-teal-600 relative">
+                                Our Vision
+                                <div class="h-0.5 w-12 bg-blue-400 mt-1 mx-auto"></div>
+                            </h3>
+                        </div>
+                        
+                        <p class="text-blue-900 relative z-10">
+                            To grow a community of like-minded innovestors to ensure innovative technology doesn't go unfunded and provide support from inception through to development.
+                        </p>
+                        
+                        <div class="mt-5 flex items-center bg-blue-50 p-2 rounded-lg">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 mr-3">
+                                <i class="fas fa-lightbulb text-teal-600"></i>
+                            </div>
+                            <p class="text-blue-600 font-medium text-sm relative z-10">
+                                Championing creative solutions and forward-thinking approaches
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="min-h-screen flex items-center py-12 bg-gradient-to-br from-gray-50 to-blue-100">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 relative inline-block">
+                    Meet the Team
+                    <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-blue-400 mx-auto mt-2"></div>
+                </h2>
+                <p class="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+                    Our dedicated team brings together expertise in finance, technology, and entrepreneurship to drive innovation forward.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col border-t-4 border-blue-500 transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div class="relative w-32 h-32 mx-auto mb-5">
+                        <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-400 text-5xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-1">Firstname Lastname</h3>
+                    <p class="text-blue-600 font-semibold text-md mb-4">Founder & CEO</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">
+                        Expert in financial markets with 15+ years experience in venture capital and startup ecosystems. John is passionate about connecting innovative ideas with the right investors to foster growth and create lasting impact.
+                    </p>
+                    <div class="flex justify-center mt-auto space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col border-t-4 border-blue-500 transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div class="relative w-32 h-32 mx-auto mb-5">
+                        <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-400 text-5xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-1">Firstname Lastname</h3>
+                    <p class="text-blue-600 font-semibold text-md mb-4">Chief Technology Officer</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">
+                        A seasoned technology leader with extensive experience building scalable and secure platforms. Jane previously led development teams at several successful fintech startups.
+                    </p>
+                    <div class="flex justify-center mt-auto space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center flex flex-col border-t-4 border-blue-500 transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div class="relative w-32 h-32 mx-auto mb-5">
+                        <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-gray-400 text-5xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-1">Firstname Lastname</h3>
+                    <p class="text-blue-600 font-semibold text-md mb-4">Chief Investment Officer</p>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">
+                        Investment strategist specializing in early-stage ventures with deep expertise in EIS/SEIS frameworks and regulatory compliance for UK startups.
+                    </p>
+                    <div class="flex justify-center mt-auto space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-blue-700 transition-colors duration-300 text-xl"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="components/footer.js"></script>
+    <script>
+        // Your existing scripts
+    </script>
+</body>
+</html> 

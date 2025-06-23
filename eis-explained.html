@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is EIS/SEIS? - The Innovative Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Using Lora and Lato fonts as in ino-times.html */
+        
+        :root {
+            --primary-blue: #2563EB;
+            --light-blue: #60A5FA;
+            --dark-blue: #1E40AF;
+            --primary-teal: #0d9488;
+            --dark-teal: #0f766e;
+            --lightest-blue: #EFF6FF;
+            --off-white: #F9FAFB;
+            --nav-background: #203F58;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #1F2937;
+            background-color: #1a365d;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-blue) !important;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .header-nav {
+            background: var(--nav-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .header-nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Offset anchor jumps so header doesn't hide top of sections */
+        section[id] {
+            scroll-margin-top: 96px; /* height of sticky header */
+        }
+        
+        .section-divider {
+            height: 4px;
+            width: 80px;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #1E40AF; /* Dark Blue */
+                z-index: 50;
+                display: flex;
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease-out;
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(120deg, var(--primary-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .benefit-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0; /* Tailwind: border-gray-200 */
+            border-radius: 0.5rem; /* Tailwind: rounded-lg */
+            padding: 1.5rem; /* Equivalent to p-6 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind: shadow-lg */
+            transition: all 0.3s ease-in-out;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Tailwind: shadow-xl */
+        }
+
+        /* Style for icons within benefit cards */
+        .benefit-card .fas, .benefit-card .far, .benefit-card .fab {
+            color: var(--primary-blue);
+            font-size: 1.75rem; /* Approx text-3xl */
+            margin-right: 1rem;
+            flex-shrink: 0; /* Prevent icon from shrinking */
+        }
+
+        /* Number counter within benefit cards */
+        .benefit-card .number-counter {
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem; /* Approx text-xl */
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0; /* Prevent counter from shrinking */
+        }
+
+        /* Headings within benefit cards */
+        .benefit-card h4 {
+            font-size: 1.25rem; /* Tailwind: text-xl */
+            font-weight: 600; /* Tailwind: font-semibold */
+            color: #1f2937; /* Tailwind: text-gray-800 */
+            margin-bottom: 0.5rem; /* Tailwind: mb-2 */
+        }
+
+        /* Paragraphs within benefit cards */
+        .benefit-card p {
+            color: #4b5563; /* Tailwind: text-gray-600 */
+            font-size: 0.95rem; /* Custom size for better density */
+            line-height: 1.6;
+            flex-grow: 1; /* Allows paragraph to take available space */
+        }
+
+        .gradient-text { /* Keeping this style if used elsewhere, though we might replace its usage */
+            background: -webkit-linear-gradient(45deg, var(--primary-blue), #10B981);
+            -webkit-background-clip: text;
+            background-clip: text; /* Standard property for compatibility */
+            -webkit-text-fill-color: transparent; /* Vendor-prefixed for broader support on text gradient */
+        }
+
+        /* Make benefit cards more compact */
+        .compact-card {
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Reduce spacing in mobile view */
+        @media (max-width: 768px) {
+            .py-16 {
+                padding-top: 2.5rem;
+                padding-bottom: 2.5rem;
+            }
+            .mb-10 {
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        .number-counter {
+            font-weight: 800;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-divider {
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-blue);
+            margin: 1rem auto;
+        }
+        
+        /* Page background gradient */
+        .page-background {
+            background: linear-gradient(to bottom, #1a365d, #0f172a);
+            min-height: 100vh;
+        }
+        
+        .hero-text-shadow {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-text-shadow {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-section-eis2 {
+            position: relative;
+            background-image: url('/assets/images/what-is-eis-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-section-eis2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(26, 54, 93, 0.9));
+        }
+
+        .hero-content-eis2 {
+            position: relative;
+            z-index: 2;
+            text-align: center; /* Center text within the block */
+            max-width: 48rem; /* Corresponds to Tailwind's max-w-3xl */
+            margin: 0 auto; /* Ensure block itself is centered if parent flex settings change */
+        }
+
+        /* Add spacing adjustments */
+        .screen-fit-section {
+            min-height: auto !important;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .section-divider {
+            margin: 0.5rem auto;
+        }
+
+        .mb-8 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .py-16 {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            .mb-10 {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="page-background">
+    <!-- Header Navigation -->
+    <header class="header-nav py-4 bg-blue-800" x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">
+                        <span>The Innovative Times</span>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="eis-explained.html" class="nav-link">What is EIS</a>
+                    <a href="community.html" class="nav-link">Community</a>
+                    <a href="insights.html" class="nav-link font-medium text-blue-300">Insights</a>
+                    <a href="contact.html" class="nav-link font-medium">Contact</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button @click="open = !open" class="md:hidden focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div x-show="open" class="md:hidden mobile-menu" :class="{'active': open}" @click.away="open = false">
+            <div class="flex justify-end mb-8">
+                <button @click="open = false" class="focus:outline-none">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <a href="#home" class="text-lg font-medium" @click="open = false">Home</a>
+                <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">About</a>
+                <a href="eis-explained.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">What is EIS</a>
+                <div x-data="{ communityOpen: false }">
+                    <button @click="communityOpen = !communityOpen" class="w-full text-left flex justify-between items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">
+                        <span>Community</span>
+                        <svg class="w-4 h-4 transform transition-transform" :class="{ 'rotate-180': communityOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="communityOpen" x-transition class="pl-4 bg-gray-50">
+                        <a href="#investors" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">For Investors</a>
+                        <a href="#entrepreneurs" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">For Entrepreneurs</a>
+                    </div>
+                </div>
+                <a href="#insights" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">Insights</a>
+                <a href="#contact" class="text-lg font-medium" @click="open = false">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section-eis2 screen-fit-section">
+        <div class="hero-content-eis2">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 fade-in hero-text-shadow">What is EIS/SEIS?</h1>
+            <p class="text-2xl md:text-3xl mb-6 fade-in hero-text-shadow whitespace-nowrap" style="animation-delay: 0.2s;">Empowering Innovation: Tax-Efficient Investment in UK Startups</p>
+            <p class="text-lg md:text-xl leading-relaxed fade-in hero-text-shadow" style="animation-delay: 0.4s;">
+                The UK government offers two powerful schemes to encourage investment in early-stage businesses: the Enterprise Investment Scheme (EIS) and the Seed Enterprise Investment Scheme (SEIS). These initiatives provide significant tax incentives to investors, fostering innovation and supporting the growth of startups across the country.
+            </p>
+            <!-- Hero image is part of the background -->
+        </div>
+    </section>
+
+    <!-- SEIS Section -->
+
+    <!-- EIS Section -->
+    <section class="py-12 px-4 bg-gradient-to-b from-teal-900 to-teal-700 screen-fit-section min-h-screen flex items-center">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 fade-in flex items-center justify-center">
+                    <i class="fas fa-rocket text-amber-400 mr-3"></i>
+                    <span>Enterprise Investment Scheme (EIS)</span>
+                </h2>
+                <div class="section-divider bg-amber-400 mx-auto fade-in"></div>
+                <p class="text-lg text-white max-w-3xl mx-auto fade-in mb-8">
+                    EIS targets slightly more established businesses and provides a range of tax incentives to encourage larger-scale investments.
+                </p>
+            </div>
+
+            <div class="bg-gradient-to-br from-white to-blue-100 rounded-xl shadow-lg p-8 mb-8">
+                <div class="flex items-center justify-center mb-6">
+                    <span class="bg-blue-200 text-blue-700 p-3 rounded-full mr-4">
+                        <i class="fas fa-award text-xl"></i>
+                    </span>
+                    <h3 class="text-2xl font-bold text-blue-900">Key Benefits for Investors</h3>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Income Tax Relief -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-blue-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-blue-100 text-blue-600 font-bold text-lg rounded-full w-10 h-10 flex items-center justify-center mr-3">30%</div>
+                            <h4 class="font-semibold text-base">Income Tax Relief</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">Up to £1-2 million annually</p>
+                    </div>
+
+                    <!-- Capital Gains Tax Deferral -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-amber-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-amber-100 text-amber-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4 class="font-semibold text-base">CGT Deferral</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">Defer CGT on reinvestment</p>
+                    </div>
+
+                    <!-- Tax-Free Growth -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-blue-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-blue-100 text-blue-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="font-semibold text-base">Tax-Free Growth</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">No UK CGT after 3+ years</p>
+                    </div>
+
+                    <!-- Loss Relief -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-purple-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-purple-100 text-purple-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4 class="font-semibold text-base">Loss Relief</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">Offset against income or CGT</p>
+                    </div>
+                </div>
+                
+                <!-- For Businesses -->
+                <div class="mt-6 pt-4 border-t border-teal-200 flex items-center bg-teal-50 p-4 rounded-lg">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mr-4">
+                        <i class="fas fa-building text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-lg">For Businesses:</h4>
+                        <p class="text-base text-gray-700">
+                            Companies can raise up to <span class="font-bold text-blue-600">£12 million</span> in total through EIS funding, with a maximum of <span class="font-bold text-blue-600">£5 million</span> per year.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="py-12 px-4 bg-gradient-to-b from-blue-900 to-blue-700 screen-fit-section min-h-screen flex items-center">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 fade-in flex items-center justify-center">
+                    <i class="fas fa-seedling text-green-400 mr-3"></i>
+                    <span>Seed Enterprise Investment Scheme (SEIS)</span>
+                </h2>
+                <div class="section-divider bg-green-400 mx-auto fade-in"></div>
+                <p class="text-lg text-white max-w-3xl mx-auto fade-in mb-8">
+                    SEIS is designed to help very early-stage companies raise capital by offering generous tax reliefs to individual investors who purchase new shares in these businesses.
+                </p>
+            </div>
+
+            <div class="bg-gradient-to-br from-white to-blue-100 rounded-xl shadow-lg p-8 mb-8">
+                <div class="flex items-center justify-center mb-6">
+                    <span class="bg-blue-200 text-blue-700 p-3 rounded-full mr-4">
+                        <i class="fas fa-star text-xl"></i>
+                    </span>
+                    <h3 class="text-2xl font-bold text-blue-900">Key Benefits for Investors</h3>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <!-- Income Tax Relief -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-green-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-green-100 text-green-600 font-bold text-lg rounded-full w-10 h-10 flex items-center justify-center mr-3">50%</div>
+                            <h4 class="font-semibold text-base">Income Tax Relief</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">Up to £200,000 annual investment</p>
+                    </div>
+
+                    <!-- Tax-Free Growth -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-blue-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-blue-100 text-blue-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="font-semibold text-base">Tax-Free Growth</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">No CGT after 3+ years</p>
+                    </div>
+
+                    <!-- Loss Relief -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-purple-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-purple-100 text-purple-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4 class="font-semibold text-base">Loss Relief</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">Offset against income tax or CGT</p>
+                    </div>
+
+                    <!-- Capital Gains Reinvestment Relief -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-teal-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-teal-100 text-teal-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h4 class="font-semibold text-base">CGT Reinvestment</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">50% CGT reduction on reinvestment</p>
+                    </div>
+
+                    <!-- Inheritance Tax Relief -->
+                    <div class="bg-white rounded-lg shadow-md border-l-4 border-l-indigo-500 p-4 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-indigo-100 text-indigo-600 rounded-full w-10 h-10 flex items-center justify-center mr-3">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h4 class="font-semibold text-base">IHT Relief</h4>
+                        </div>
+                        <p class="text-gray-700 text-sm">100% after 2 years ownership</p>
+                    </div>
+                </div>
+                
+                <!-- For Startups -->
+                <div class="mt-6 pt-4 border-t border-blue-200 flex items-center bg-blue-50 p-4 rounded-lg">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mr-4">
+                        <i class="fas fa-lightbulb text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-lg">For Startups:</h4>
+                        <p class="text-base text-gray-700">
+                            Eligible companies can raise up to <span class="font-bold text-green-600">£250,000</span> to support business development, including marketing, staffing, and R&D.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Investors Section -->
+    <section class="py-16 px-4 bg-white screen-fit-section">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2 fade-in">
+                    <i class="fas fa-globe text-blue-500 mr-3"></i>
+                    International Investors: No UK Capital Gains Tax
+                </h2>
+                <div class="section-divider fade-in"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto fade-in">
+                    One of the most attractive aspects of EIS and SEIS for non-UK investors is the exemption from UK Capital Gains Tax on qualifying shares.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="benefit-card scale-in" style="animation-delay: 0.1s;">
+                    <i class="fas fa-percentage text-4xl mb-4"></i>
+                    <h4 class="text-lg font-semibold mb-2">No UK CGT on EIS/SEIS Gains</h4>
+                    <p class="text-sm text-gray-600">Regardless of residency, international investors pay no UK Capital Gains Tax on qualifying shares held for at least three years.</p>
+                </div>
+                <div class="benefit-card scale-in" style="animation-delay: 0.2s;">
+                    <i class="fas fa-money-bill-wave text-4xl mb-4"></i>
+                    <h4 class="text-lg font-semibold mb-2">No UK Withholding Tax</h4>
+                    <p class="text-sm text-gray-600">Upon sale, gains are returned in full, with no withholding or UK tax deducted at source.</p>
+                </div>
+                <div class="benefit-card scale-in" style="animation-delay: 0.3s;">
+                    <i class="fas fa-file-contract text-4xl mb-4"></i>
+                    <h4 class="text-lg font-semibold mb-2">Double Taxation Treaties</h4>
+                    <p class="text-sm text-gray-600">Many jurisdictions benefit from bilateral tax treaties which can reduce or eliminate taxation on capital gains.</p>
+                </div>
+                <div class="benefit-card scale-in" style="animation-delay: 0.4s;">
+                    <i class="fas fa-chart-pie text-4xl mb-4"></i>
+                    <h4 class="text-lg font-semibold mb-2">UK Startup Exposure</h4>
+                    <p class="text-sm text-gray-600">Gain exposure to the UK's thriving startup scene in technology, life sciences, fintech, and green innovation.</p>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-8 rounded-lg fade-in">
+                <div class="flex items-center justify-center mb-6">
+                    <img src="https://www.winsavvy.com/wp-content/uploads/2024/04/business-handshake-agreement-agreement-8598076-1024x682.jpg" 
+                         alt="Business Agreement Handshake" 
+                         class="w-64 h-40 object-cover rounded-lg shadow-lg">
+                </div>
+                <h4 class="text-2xl font-bold mb-4 text-center">Why Consider EIS and SEIS?</h4>
+                <p class="text-lg text-gray-700 text-center">
+                    Whether you're a UK taxpayer or an international investor, EIS and SEIS open the door to early-stage, high-growth opportunities with uniquely generous tax benefits. These schemes are designed not only to support innovation but also to mitigate risk and enhance return potential — a win-win for entrepreneurs and investors alike.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="py-16 px-4 bg-gray-50 screen-fit-section">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2 fade-in">
+                    <i class="fas fa-chart-bar text-green-500 mr-3"></i>
+                    Case Studies
+                </h2>
+                <div class="section-divider fade-in"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto fade-in">
+                    Real-world examples demonstrating the power of EIS investments
+                </p>
+            </div>
+
+            <!-- Case Study 1 -->
+            <div class="benefit-card slide-in-left mb-12">
+                <h3 class="text-2xl font-bold mb-4">Case Study 1: Successful Single EIS Investment – Loch Fyne Oysters</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <div class="space-y-3 mb-6">
+                            <p><strong>Company:</strong> Loch Fyne Oysters</p>
+                            <p><strong>Sector:</strong> Food Production</p>
+                            <p><strong>Investor:</strong> High-Net-Worth Individual, UK income of £120,000</p>
+                            <p><strong>Investment:</strong> £20,000</p>
+                            <p><strong>Outcome:</strong> Acquired by a larger company, exit value 3x initial investment</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-4">Financial Breakdown</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>Initial Investment</span>
+                                    <span class="font-semibold">£20,000</span>
+                                </div>
+                                <div class="flex justify-between text-green-600">
+                                    <span>Income Tax Relief (30%)</span>
+                                    <span class="font-semibold">£6,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Net Cost After Tax Relief</span>
+                                    <span class="font-semibold">£14,000</span>
+                                </div>
+                                <div class="flex justify-between text-blue-600">
+                                    <span>Exit Value (3x return)</span>
+                                    <span class="font-semibold">£60,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Capital Gains Tax (CGT)</span>
+                                    <span class="font-semibold text-green-600">£0 (EIS exemption)</span>
+                                </div>
+                                <hr class="my-2">
+                                <div class="flex justify-between text-lg font-bold text-green-700">
+                                    <span>Total Profit</span>
+                                    <span>£46,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <canvas id="case1Chart" style="height: 400px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study 2 -->
+            <div class="benefit-card slide-in-right">
+                <h3 class="text-2xl font-bold mb-4">Case Study 2: Diversified Portfolio of 4 EIS Startups – Mixed Results</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <div class="space-y-3 mb-6">
+                            <p><strong>Investor:</strong> Certified Sophisticated Investor</p>
+                            <p><strong>Total Investment:</strong> £40,000 (4 x £10,000 in EIS-eligible startups)</p>
+                            <p><strong>Outcomes:</strong></p>
+                            <ul class="ml-4 space-y-1">
+                                <li>• Company A: 3x return → £30,000</li>
+                                <li>• Company B: Break-even → £10,000</li>
+                                <li>• Company C: Failed → £0</li>
+                                <li>• Company D: Failed → £0</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-4">Summary</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>Total Invested</span>
+                                    <span class="font-semibold">£40,000</span>
+                                </div>
+                                <div class="flex justify-between text-green-600">
+                                    <span>Total Income Tax Relief (30%)</span>
+                                    <span class="font-semibold">£12,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Total Exit Proceeds</span>
+                                    <span class="font-semibold">£40,000</span>
+                                </div>
+                                <div class="flex justify-between text-green-600">
+                                    <span>Loss Relief on C & D</span>
+                                    <span class="font-semibold">£6,300</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Net Cost After Tax Relief</span>
+                                    <span class="font-semibold">£28,000</span>
+                                </div>
+                                <hr class="my-2">
+                                <div class="flex justify-between text-lg font-bold text-green-700">
+                                    <span>Net Profit</span>
+                                    <span>£12,000 (43% return)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <canvas id="case2Chart" style="height: 400px;"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-6 rounded-lg mt-6">
+                    <h4 class="text-lg font-semibold mb-2">Key Insight</h4>
+                    <p class="text-gray-700">Despite two total losses, the investor broke even in cash terms and still achieved a £12,000 net gain, thanks to tax reliefs and the success of one company.</p>
+                </div>
+            </div>
+
+            <!-- Important Considerations -->
+            <div class="bg-gradient-to-r from-red-50 to-orange-50 p-8 rounded-lg mt-12 fade-in">
+                <h4 class="text-2xl font-bold mb-4 text-center">
+                    <i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i>
+                    Important Considerations
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <p>• Shares must be held for at least 3 years to retain tax relief</p>
+                        <p>• Loss relief is calculated on net loss after income tax relief</p>
+                    </div>
+                    <div class="space-y-3">
+                        <p>• Carry-back allows relief to be applied to prior year's tax bill</p>
+                        <p>• Must be a UK taxpayer to benefit from income tax relief</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-gray-100 py-10 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                <h2 class="text-2xl font-bold mb-3 text-blue-800 fade-in">Ready to Join?</h2>
+                <p class="text-gray-700 mb-4 fade-in">Be part of our fast-growing community investing in the UK's next generation of innovation.</p>
+                <a href="community.html" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 transition-all duration-300">
+                    Join the Investor Community
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="components/footer.js"></script>
+    <script>
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Case Study 1 Chart
+        const ctx1 = document.getElementById('case1Chart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Net Cost', 'Tax Relief', 'Capital Gains'],
+                datasets: [{
+                    data: [14000, 6000, 40000],
+                    backgroundColor: ['#ef4444', '#10b981', '#3b82f6'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Investment Breakdown - Loch Fyne Oysters'
+                    }
+                }
+            }
+        });
+
+        // Case Study 2 Chart
+        const ctx2 = document.getElementById('case2Chart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Company A', 'Company B', 'Company C', 'Company D'],
+                datasets: [{
+                    label: 'Investment',
+                    data: [10000, 10000, 10000, 10000],
+                    backgroundColor: '#6366f1',
+                    borderRadius: 4
+                }, {
+                    label: 'Exit Value',
+                    data: [30000, 10000, 0, 0],
+                    backgroundColor: '#10b981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Diversified Portfolio Performance'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '£' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth scrolling for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

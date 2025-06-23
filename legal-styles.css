@@ -1,0 +1,372 @@
+:root {
+    --primary-blue: #2563EB;
+    --light-blue: #60A5FA;
+    --dark-blue: #1E40AF;
+    --primary-teal: #0d9488;
+    --dark-teal: #0f766e;
+    --lightest-blue: #EFF6FF;
+    --off-white: #F9FAFB;
+    --nav-background: #203F58;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--off-white);
+    color: #1F2937;
+    line-height: 1.6;
+}
+
+.legal-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.legal-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 4px solid var(--primary-blue);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: var(--nav-background);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--dark-blue);
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-teal);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+ul, ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+.back-to-site {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-teal);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    margin-top: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-site:hover {
+    background-color: var(--dark-teal);
+}
+
+.last-updated {
+    font-style: italic;
+    color: #666;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.section h2 {
+    margin-bottom: 1rem;
+    color: var(--nav-background);
+}
+
+.section h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--nav-background);
+}
+
+.section p {
+    margin-bottom: 1rem;
+}
+
+.section ul, .section ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.section li {
+    margin-bottom: 0.5rem;
+    list-style-type: disc;
+}
+
+.section ol li {
+    list-style-type: decimal;
+}
+
+.highlight {
+    background-color: var(--lightest-blue);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--primary-blue);
+}
+
+.warning {
+    background-color: #FEF2F2;
+    color: #991B1B;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    border-left: 4px solid #DC2626;
+}
+
+.last-updated {
+    font-style: italic;
+    color: #6B7280;
+    margin: 2rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid #E5E7EB;
+}
+
+.back-to-site {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+
+.back-to-site:hover {
+    background-color: var(--dark-blue);
+}
+
+/* Navigation styles for legal pages */
+.legal-nav {
+    background: var(--nav-background);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.legal-nav .nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.legal-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+    transition: width 0.3s ease;
+}
+
+.legal-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+.legal-mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #1E40AF;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.legal-mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .legal-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .section {
+        padding: 0.75rem;
+    }
+}
+
+/* Footer styles */
+footer.bg-gray-900 {
+    background-color: #111827;
+}
+
+footer .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer .grid {
+    display: grid;
+}
+
+footer .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+    footer .md\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    footer .md\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+footer .gap-8 {
+    gap: 2rem;
+}
+
+footer .text-white {
+    color: #ffffff;
+}
+
+footer .text-gray-400 {
+    color: #9CA3AF;
+}
+
+footer .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+footer .font-bold {
+    font-weight: 700;
+}
+
+footer .mb-4 {
+    margin-bottom: 1rem;
+}
+
+footer .mt-4 {
+    margin-top: 1rem;
+}
+
+footer .space-x-4 > * + * {
+    margin-left: 1rem;
+}
+
+footer .space-y-2 > * + * {
+    margin-top: 0.5rem;
+}
+
+footer .hover\:text-white:hover {
+    color: #ffffff;
+}
+
+footer .transition {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+footer .border-t {
+    border-top-width: 1px;
+}
+
+footer .border-gray-800 {
+    border-color: #1F2937;
+}
+
+footer .mt-8 {
+    margin-top: 2rem;
+}
+
+footer .pt-8 {
+    padding-top: 2rem;
+}
+
+footer .text-center {
+    text-align: center;
+}
+
+footer .py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+footer .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Fix for social media icons */
+footer .fab {
+    font-size: 1.25rem;
+}
+
+/* Fix for footer links */
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+/* Ensure proper spacing in footer grid */
+footer .grid > div {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    footer .grid > div {
+        margin-bottom: 0;
+    }
+}
+
+/* Fix for contact info */
+footer .fas {
+    margin-right: 0.5rem;
+} 
