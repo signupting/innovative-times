@@ -406,61 +406,37 @@
     <div id="loading-overlay" class="loading-overlay"></div>
 
     <div class="hero-section-eis2">
-        <video id="eis-video-bg" autoplay loop muted playsinline>
-            <source src="/assets/videos/what-is-eis-bg.mp4" type="video/mp4">
-        </video>
+        <img id="eis-bg-image" src="/assets/images/what-is-eis-bg.webp" alt="EIS Background" class="w-full h-full object-cover absolute top-0 left-0">
         <div class="hero-section-eis2::before"></div>
     <!-- Preloader Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('eis-video-bg');
+            const bgImage = document.getElementById('eis-bg-image');
             const body = document.body;
             const overlay = document.getElementById('loading-overlay');
 
             function showContent() {
-                // Make sure video is playing before removing overlay
-                const playPromise = video.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        // Video is playing, wait a bit more to ensure it's visible
-                        setTimeout(function() {
-                            // Fade out the overlay
-                            overlay.style.opacity = '0';
-                            
-                            // Remove overlay and show content after fade completes
-                            setTimeout(function() {
-                                overlay.style.display = 'none';
-                                body.classList.remove('preloader');
-                            }, 500);
-                        }, 1000);
-                    }).catch(error => {
-                        // Auto-play was prevented, show content anyway after delay
-                        console.log('Auto-play prevented:', error);
-                        setTimeout(function() {
-                            overlay.style.opacity = '0';
-                            setTimeout(function() {
-                                overlay.style.display = 'none';
-                                body.classList.remove('preloader');
-                            }, 500);
-                        }, 1000);
-                    });
-                }
+                // Add a delay to ensure smooth transition
+                setTimeout(function() {
+                    // Fade out the overlay
+                    overlay.style.opacity = '0';
+                    
+                    // Remove overlay and show content after fade completes
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        body.classList.remove('preloader');
+                    }, 500);
+                }, 1000);
             }
 
-            // Preload the video
-            if (video) {
-                // Try to load video data
-                video.load();
-                
-                // Check if video data is already available
-                if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+            // Check if background image exists and handle loading
+            if (bgImage) {
+                if (bgImage.complete) {
                     showContent();
                 } else {
-                    // Wait for enough data to be loaded
-                    video.addEventListener('canplaythrough', showContent, { once: true });
+                    bgImage.addEventListener('load', showContent, { once: true });
                     
-                    // Fallback in case video takes too long
+                    // Fallback in case image takes too long
                     setTimeout(function() {
                         if (overlay.style.opacity !== '0') {
                             showContent();
@@ -468,7 +444,7 @@
                     }, 5000); // 5 second maximum wait
                 }
             } else {
-                // No video found, just remove the overlay after a short delay
+                // No background image found, just remove the overlay after a short delay
                 setTimeout(function() {
                     overlay.style.opacity = '0';
                     setTimeout(function() {
@@ -485,7 +461,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <h1 class="text-2xl md:text-3xl font-bold text-white">
-                        <span>The Innovative Times</span>
+                        <a href="index.html">The Innovative Times</a>
                     </h1>
                 </div>
                 
@@ -518,21 +494,12 @@
                 </button>
             </div>
             <div class="flex flex-col space-y-6">
-                <a href="#home" class="text-lg font-medium" @click="open = false">Home</a>
-                <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">About</a>
-                <a href="eis-explained.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">What is EIS</a>
-                <div x-data="{ communityOpen: false }">
-                    <button @click="communityOpen = !communityOpen" class="w-full text-left flex justify-between items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">
-                        <span>Community</span>
-                        <svg class="w-4 h-4 transform transition-transform" :class="{ 'rotate-180': communityOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div x-show="communityOpen" x-transition class="pl-4 bg-gray-50">
-                        <a href="#investors" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">For Investors</a>
-                        <a href="#entrepreneurs" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">For Entrepreneurs</a>
-                    </div>
-                </div>
-                <a href="#insights" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" @click="open = false">Insights</a>
-                <a href="#contact" class="text-lg font-medium" @click="open = false">Contact</a>
+                <a href="index.html" class="text-lg font-medium text-white" @click="open = false">Home</a>
+                <a href="about.html" class="text-lg font-medium text-white" @click="open = false">About</a>
+                <a href="eis-explained.html" class="text-lg font-medium text-white" @click="open = false">What is EIS</a>
+                <a href="community.html" class="text-lg font-medium text-white" @click="open = false">Community</a>
+                <a href="insights.html" class="text-lg font-medium text-white" @click="open = false">Insights</a>
+                <a href="contact.html" class="text-lg font-medium text-white" @click="open = false">Contact</a>
             </div>
         </div>
     </header>
