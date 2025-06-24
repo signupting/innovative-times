@@ -27,6 +27,21 @@
             opacity: 0;
             transition: visibility 0s 0.5s, opacity 0.5s linear;
         }
+        
+        /* Add overlay to hide content until background loads */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-in-out;
+        }
 
         body {
             font-family: 'Lato', sans-serif;
@@ -131,6 +146,8 @@
     </style>
 </head>
 <body class="preloader">
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay"></div>
     <!-- Header Navigation -->
     <header class="header-nav py-4 bg-blue-800" x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
         <div class="container mx-auto px-4 md:px-8">
@@ -183,7 +200,7 @@
     <!-- About Section -->
     <section class="py-12 min-h-screen flex items-center relative overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="/assets/images/about-bg.webp" alt="Background" class="w-full h-full object-cover">
+            <img id="background-image" src="/assets/images/about-bg.webp" alt="Background" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-blue-900 bg-opacity-70"></div>
         </div>
         <div class="container mx-auto px-4 md:px-8">
@@ -396,6 +413,53 @@
     <script src="components/footer.js"></script>
     <script>
         // Your existing scripts
+    </script>
+    <!-- Preloader Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backgroundImage = document.getElementById('background-image');
+            const body = document.body;
+            const overlay = document.getElementById('loading-overlay');
+
+            function showContent() {
+                // Add a delay to ensure smooth transition
+                setTimeout(function() {
+                    // Fade out the overlay
+                    overlay.style.opacity = '0';
+                    
+                    // Remove overlay and show content after fade completes
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        body.classList.remove('preloader');
+                    }, 500);
+                }, 1000);
+            }
+
+            // Check if background image exists and handle loading
+            if (backgroundImage) {
+                if (backgroundImage.complete) {
+                    showContent();
+                } else {
+                    backgroundImage.addEventListener('load', showContent, { once: true });
+                    
+                    // Fallback in case image takes too long
+                    setTimeout(function() {
+                        if (overlay.style.opacity !== '0') {
+                            showContent();
+                        }
+                    }, 5000); // 5 second maximum wait
+                }
+            } else {
+                // No background image found, just remove the overlay after a short delay
+                setTimeout(function() {
+                    overlay.style.opacity = '0';
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        body.classList.remove('preloader');
+                    }, 500);
+                }, 1000);
+            }
+        });
     </script>
 </body>
 </html> 
