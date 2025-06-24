@@ -318,11 +318,7 @@
         }
         
         .hero-text-shadow {
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-        }
-
-        .hero-text-shadow {
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .hero-section-eis2 {
@@ -336,17 +332,14 @@
             overflow: hidden;
         }
 
-        #eis-video-bg {
+        .hero-bg-image {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 1;
-            transform: translateX(-50%) translateY(-50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            z-index: 1;
         }
 
         .hero-section-eis2::before {
@@ -356,15 +349,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(26, 54, 93, 0.9));
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(26, 54, 93, 0.8));
+            z-index: 2;
         }
 
         .hero-content-eis2 {
             position: relative;
-            z-index: 2;
-            text-align: center; /* Center text within the block */
-            max-width: 48rem; /* Corresponds to Tailwind's max-w-3xl */
-            margin: 0 auto; /* Ensure block itself is centered if parent flex settings change */
+            z-index: 3;
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
         /* Add spacing adjustments */
@@ -405,56 +400,6 @@
     <!-- Loading overlay -->
     <div id="loading-overlay" class="loading-overlay"></div>
 
-    <div class="hero-section-eis2">
-        <img id="eis-bg-image" src="/assets/images/what-is-eis-bg.webp" alt="EIS Background" class="w-full h-full object-cover absolute top-0 left-0">
-        <div class="hero-section-eis2::before"></div>
-    <!-- Preloader Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const bgImage = document.getElementById('eis-bg-image');
-            const body = document.body;
-            const overlay = document.getElementById('loading-overlay');
-
-            function showContent() {
-                // Add a delay to ensure smooth transition
-                setTimeout(function() {
-                    // Fade out the overlay
-                    overlay.style.opacity = '0';
-                    
-                    // Remove overlay and show content after fade completes
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                        body.classList.remove('preloader');
-                    }, 500);
-                }, 1000);
-            }
-
-            // Check if background image exists and handle loading
-            if (bgImage) {
-                if (bgImage.complete) {
-                    showContent();
-                } else {
-                    bgImage.addEventListener('load', showContent, { once: true });
-                    
-                    // Fallback in case image takes too long
-                    setTimeout(function() {
-                        if (overlay.style.opacity !== '0') {
-                            showContent();
-                        }
-                    }, 5000); // 5 second maximum wait
-                }
-            } else {
-                // No background image found, just remove the overlay after a short delay
-                setTimeout(function() {
-                    overlay.style.opacity = '0';
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                        body.classList.remove('preloader');
-                    }, 500);
-                }, 1000);
-            }
-        });
-    </script>
     <!-- Header Navigation -->
     <header class="header-nav py-4 bg-blue-800" x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.pageYOffset > 50">
         <div class="container mx-auto px-4 md:px-8">
@@ -505,16 +450,53 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-section-eis2 screen-fit-section">
-            <div class="hero-content-eis2">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4 fade-in hero-text-shadow">What is EIS/SEIS?</h1>
-            <p class="text-2xl md:text-3xl mb-6 fade-in hero-text-shadow whitespace-nowrap" style="animation-delay: 0.2s;">Empowering Innovation: Tax-Efficient Investment in UK Startups</p>
-            <p class="text-lg md:text-xl leading-relaxed fade-in hero-text-shadow" style="animation-delay: 0.4s;">
-                The UK government offers two powerful schemes to encourage investment in early-stage businesses: the Enterprise Investment Scheme (EIS) and the Seed Enterprise Investment Scheme (SEIS). These initiatives provide significant tax incentives to investors, fostering innovation and supporting the growth of startups across the country.
-            </p>
-            <!-- Hero image is part of the background -->
+    <div class="hero-section-eis2">
+        <img src="/assets/images/what-is-eis-bg.webp" alt="Background Image" class="hero-bg-image">
+        <div class="hero-content-eis2">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-text-shadow fade-in" style="animation-delay: 0.8s;">What is EIS/SEIS?</h1>
+            <p class="text-xl md:text-2xl mb-8 hero-text-shadow fade-in" style="animation-delay: 1s;">Tax-Efficient Investment Innovation</p>
+            <div class="section-divider mx-auto fade-in" style="animation-delay: 1.2s;"></div>
+            <p class="text-lg md:text-xl mt-6 hero-text-shadow fade-in" style="animation-delay: 1.4s;">The UK offers two powerful schemes to encourage investment in innovative businesses: the Enterprise Investment Scheme (EIS) and Seed Enterprise Investment Scheme (SEIS). These initiatives provide significant tax benefits while supporting innovation and growth of startups.</p>
         </div>
-    </section>
+    </div>
+
+    <!-- Preloader Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgImage = document.querySelector('.hero-bg-image');
+            const body = document.body;
+            const overlay = document.getElementById('loading-overlay');
+
+            function showContent() {
+                // Add a longer delay to ensure smooth transition
+                setTimeout(function() {
+                    // Fade out the overlay
+                    overlay.style.opacity = '0';
+                    
+                    // Remove overlay and show content after fade completes
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                        body.classList.remove('preloader');
+                    }, 800);
+                }, 200);
+            }
+
+            // Check if image exists and handle loading
+            if (bgImage) {
+                if (bgImage.complete) {
+                    showContent();
+                } else {
+                    bgImage.addEventListener('load', showContent);
+                }
+                
+                // Fallback in case image takes too long
+                setTimeout(showContent, 3000);
+            } else {
+                // No image found, just remove the overlay after a short delay
+                setTimeout(showContent, 500);
+            }
+        });
+    </script>
 
     <!-- SEIS Section -->
 
