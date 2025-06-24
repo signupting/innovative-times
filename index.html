@@ -1068,8 +1068,11 @@
             const body = document.body;
 
             function showContent() {
-                body.classList.remove('preloader');
-                video.style.opacity = '1';
+                // Add a 1-second delay before showing content
+                setTimeout(function() {
+                    body.classList.remove('preloader');
+                    video.style.opacity = '1';
+                }, 1000);
             }
 
             if (video) {
