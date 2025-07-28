@@ -87,10 +87,56 @@
             position: relative;
             display: flex;
             align-items: center; /* Vertically center content */
-            justify-content: flex-end; /* Align content to the right */
-            text-align: right; /* Align text to the right */
+            justify-content: center; /* Center content */
+            text-align: center; /* Center text */
             padding: 0 8%; /* Add some padding on the right */
             overflow: hidden;
+        }
+        
+        /* Hero Logo Styles */
+        .hero-logo {
+            width: 800px;
+            max-width: 85vw;
+            margin: -400px auto 2rem auto;
+            z-index: 40;
+        }
+        
+        .hero-logo-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.4));
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-logo {
+                width: 600px;
+                margin-top: -200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-logo {
+                width: 500px;
+                margin-top: -150px;
+                margin-bottom: 1.5rem;
+            }
+            .hero-content {
+                position: absolute !important;
+                bottom: 30px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-logo {
+                width: 400px;
+                margin-top: -120px;
+                margin-bottom: 1rem;
+            }
+            .hero-content {
+                position: absolute !important;
+                bottom: 20px !important;
+            }
         }
 
         #hero-video {
@@ -194,7 +240,7 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -10px;
             left: 50%;
             width: 0;
             height: 2px;
@@ -673,25 +719,24 @@
             poster="/assets/images/hero-placeholder.webp">
             <source src="/assets/videos/what-is-eis-bg.mp4" type="video/mp4">
         </video>
-        <div class="relative z-30" style="margin-bottom: 10vh;"> <!-- Move content up -->
-            <div class="max-w-3xl">
-                <div class="mb-8 flex justify-end">
-                    <img src="/assets/images/innovative-times-logo.png" alt="The Innovative Times" class="h-48 md:h-64 w-auto">
-                </div>
-                <div class="w-full flex justify-end">
-                    <div class="w-2/3 h-1 bg-white my-4 rounded-full opacity-50"></div>
-                </div>
-                <p class="mt-6 text-2xl md:text-3xl text-gray-100 hero-text-shadow font-light">
-                    AI Startup and Investment News
-                </p>
-                <div class="mt-12 flex flex-col sm:flex-row sm:justify-end gap-5">
-                    <a href="community.html" class="btn-primary text-lg">
-                        Join our Community <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="eis-explained.html" class="btn-primary bg-opacity-20 backdrop-blur-sm border border-white text-white hover:bg-opacity-30 text-lg">
-                        Learn About EIS <i class="fas fa-info-circle ml-2"></i>
-                    </a>
-                </div>
+        <!-- Hero Logo positioned independently -->
+        <div class="hero-logo relative z-30">
+            <img src="/assets/images/logo2.png" alt="The Innovative Times" class="hero-logo-img">
+        </div>
+        
+        <!-- Text and buttons positioned at bottom -->
+        <div class="hero-content absolute bottom-25 left-0 right-0 z-30">
+            <p class="text-2xl md:text-3xl text-gray-100 hero-text-shadow font-light mb-8 text-center">
+                AI Startup and Investment News
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+                <a href="community.html" class="btn-primary text-lg">
+                    Join our Community <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="eis-explained.html" class="btn-primary bg-opacity-20 backdrop-blur-sm border border-white text-white hover:bg-opacity-30 text-lg">
+                    Learn About EIS <i class="fas fa-info-circle ml-2"></i>
+                </a>
             </div>
         </div>
     </section>
