@@ -96,32 +96,12 @@
 
         .content-card {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
-        }
-
-        .content-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue), var(--primary-teal));
-            border-radius: 20px 20px 0 0;
-        }
-
-        .content-card:hover {
-            transform: translate3d(0, -10px, 0);
-            box-shadow: 0 30px 60px rgba(37, 99, 235, 0.2);
+            border-top: 4px solid var(--primary-blue);
+            margin-bottom: 2rem;
         }
 
         .feature-icon {
@@ -135,86 +115,38 @@
             color: white;
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-            transition: transform 0.3s ease;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
-        }
-
-        .feature-icon:hover {
-            transform: translate3d(0, 0, 0) scale(1.1) rotate(5deg);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
         }
 
         .focus-item {
             background: linear-gradient(135deg, var(--lightest-blue), #ffffff);
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 1.5rem;
             border-left: 4px solid var(--primary-blue);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 1rem;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
-        }
-
-        .focus-item:hover {
-            transform: translate3d(10px, 0, 0);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
         }
 
         .offer-card {
             background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-top: 5px solid var(--primary-blue);
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
-        }
-
-        .offer-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--lightest-blue), transparent);
-            border-radius: 0 0 0 100px;
-            opacity: 0.5;
-        }
-
-        .offer-card:hover {
-            transform: translate3d(0, -15px, 0);
-            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--primary-blue);
+            margin-bottom: 1.5rem;
         }
 
         .offer-card.teal {
             border-top-color: var(--primary-teal);
         }
 
-        .offer-card.teal::after {
-            background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), transparent);
-        }
-
         .floating-element {
-            position: absolute;
-            animation: float 6s ease-in-out infinite;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
+            display: none;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(0, -20px, 0); }
-        }
-
-        /* Smooth scrolling optimization */
+        /* Fix scrolling performance */
         html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+            scroll-behavior: auto;
         }
 
         * {

@@ -33,6 +33,149 @@
         .section-divider { width: 100px; height: 4px; background-color: var(--primary-blue); margin: 1rem auto; }
         .card { transition: all 0.3s ease; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+
+        .search-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 3rem;
+        }
+
+        .search-input {
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            background: white;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .filter-tag {
+            background: linear-gradient(135deg, var(--lightest-blue), #ffffff);
+            color: var(--primary-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .insight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.15);
+        }
+
+        .insight-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .insight-content {
+            padding: 1.5rem;
+        }
+
+        .insight-category {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .insight-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .insight-excerpt {
+            color: #6B7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .insight-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .insight-date {
+            color: #9CA3AF;
+            font-size: 0.875rem;
+        }
+
+        .insight-read-more {
+            color: var(--primary-teal);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .insight-read-more:hover {
+            color: var(--dark-teal);
+            transform: translateX(3px);
+        }
         .header-nav { background: var(--nav-background); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; transition: all 0.3s ease; }
         .nav-link { position: relative; transition: all 0.3s ease; color: white; }
         .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: linear-gradient(to right, var(--primary-blue), var(--light-blue)); transition: width 0.3s ease; }
@@ -58,7 +201,41 @@
                     <a href="index.html" class="nav-link font-medium">Home</a>
                     <a href="about.html" class="nav-link">About</a>
                     <a href="eis-explained.html" class="nav-link">What is EIS</a>
-                    <a href="community.html" class="nav-link">Community</a>
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" @click.away="open = false" class="nav-link flex items-center bg-transparent border-none cursor-pointer">
+                            Community
+                            <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200" :class="{'rotate-180': open}"></i>
+                        </button>
+                        <div x-show="open" 
+                             x-transition:enter="transition ease-out duration-200" 
+                             x-transition:enter-start="opacity-0 transform scale-95" 
+                             x-transition:enter-end="opacity-100 transform scale-100" 
+                             x-transition:leave="transition ease-in duration-75" 
+                             x-transition:leave-start="opacity-100 transform scale-100" 
+                             x-transition:leave-end="opacity-0 transform scale-95" 
+                             class="absolute left-0 mt-2 w-56 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 z-50 border border-gray-100">
+                            <div class="py-2">
+                                <a href="innovators.html" class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-gray-900 transition-all duration-200">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors duration-200">
+                                        <i class="fas fa-lightbulb text-blue-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">Innovators</div>
+                                        <div class="text-xs text-gray-500">For entrepreneurs</div>
+                                    </div>
+                                </a>
+                                <a href="investors.html" class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-gray-900 transition-all duration-200">
+                                    <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center mr-3 group-hover:bg-teal-200 transition-colors duration-200">
+                                        <i class="fas fa-coins text-teal-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">Investors</div>
+                                        <div class="text-xs text-gray-500">For funding partners</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="insights.html" class="nav-link font-medium text-blue-300">Insights</a>
                     <a href="contact.html" class="nav-link font-medium">Contact</a>
                 </nav>
@@ -78,12 +255,31 @@
                 </button>
             </div>
             <div class="flex flex-col space-y-6 text-white items-center">
-                <a href="ino-times.html#home" class="text-lg font-medium" @click="open = false">Home</a>
+                <a href="index.html" class="text-lg font-medium" @click="open = false">Home</a>
                 <a href="about.html" class="text-lg font-medium" @click="open = false">About</a>
                 <a href="eis-explained.html" class="text-lg font-medium" @click="open = false">What is EIS</a>
-                <a href="ino-times.html#community" class="text-lg font-medium" @click="open = false">Community</a>
+                <div x-data="{ communityOpen: false }" class="border-l-2 border-gray-600 pl-4">
+                    <button @click="communityOpen = !communityOpen" class="text-lg font-medium text-white w-full text-left flex items-center justify-between bg-transparent border-none cursor-pointer">
+                        <span>Community</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200" :class="{'rotate-180': communityOpen}"></i>
+                    </button>
+                    <div x-show="communityOpen" x-transition class="ml-4 mt-3 space-y-3 bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                        <a href="innovators.html" class="group flex items-center py-2 text-gray-300 hover:text-white transition-colors duration-200" @click="open = false">
+                            <div class="w-6 h-6 bg-blue-600 bg-opacity-20 rounded-full flex items-center justify-center mr-3 group-hover:bg-opacity-40 transition-all duration-200">
+                                <i class="fas fa-lightbulb text-blue-400 text-xs"></i>
+                            </div>
+                            <span class="text-sm font-medium">Innovators</span>
+                        </a>
+                        <a href="investors.html" class="group flex items-center py-2 text-gray-300 hover:text-white transition-colors duration-200" @click="open = false">
+                            <div class="w-6 h-6 bg-teal-600 bg-opacity-20 rounded-full flex items-center justify-center mr-3 group-hover:bg-opacity-40 transition-all duration-200">
+                                <i class="fas fa-coins text-teal-400 text-xs"></i>
+                            </div>
+                            <span class="text-sm font-medium">Investors</span>
+                        </a>
+                    </div>
+                </div>
                 <a href="insights.html" class="text-lg font-medium text-blue-300" @click="open = false">Insights</a>
-                <a href="ino-times.html#contact" class="text-lg font-medium" @click="open = false">Contact</a>
+                <a href="contact.html" class="text-lg font-medium" @click="open = false">Contact</a>
             </div>
         </div>
     </header>
@@ -100,76 +296,150 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Article 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
-                        <img class="h-48 w-full object-cover" src="https://c.pxhere.com/images/56/ba/951725629e801f44c6938c1aa4a3-1584335.jpg!d" alt="Businessman walking up a stack of coins representing financial growth">
-                        <div class="p-6">
-                            <div class="flex items-center mb-2">
-                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> May 28, 2025</span>
-                                <span class="text-sm text-purple-600 font-semibold"><i class="fas fa-tag mr-1"></i> SEIS</span>
+                <!-- Search and Filter Section -->
+                <div class="search-container">
+                    <div class="relative">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search insights, companies, topics, or keywords...">
+                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                            <i class="fas fa-search text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="filter-tags">
+                        <button class="filter-tag active" data-filter="all">All</button>
+                        <button class="filter-tag" data-filter="fintech">FinTech</button>
+                        <button class="filter-tag" data-filter="cleantech">CleanTech</button>
+                        <button class="filter-tag" data-filter="healthtech">HealthTech</button>
+                        <button class="filter-tag" data-filter="policy">Policy</button>
+                        <button class="filter-tag" data-filter="seis">SEIS</button>
+                        <button class="filter-tag" data-filter="eis">EIS</button>
+                        <button class="filter-tag" data-filter="market-analysis">Market Analysis</button>
+                    </div>
+                </div>
+
+                <div class="insights-grid" id="insightsGrid">
+                    <!-- SEIS Investment Article -->
+                    <div class="insight-card" data-category="seis policy" data-keywords="seis investment rule changes hmrc funding surge tax year investor response limits">
+                        <img class="insight-image" src="https://c.pxhere.com/images/56/ba/951725629e801f44c6938c1aa4a3-1584335.jpg!d" alt="Businessman walking up a stack of coins representing financial growth">
+                        <div class="insight-content">
+                            <span class="insight-category">SEIS</span>
+                            <h3 class="insight-title">SEIS Investment Skyrockets 51% After Rule Changes</h3>
+                            <p class="insight-excerpt">New HMRC data reveals a massive 51% surge in SEIS funding for the 23/24 tax year, showing an immediate and powerful investor response to increased investment limits.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> May 28, 2025</span>
+                                <a href="article-seis-skyrockets.html" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                             </div>
-                            <h3 class="font-bold text-xl mb-2">SEIS Investment Skyrockets 51% After Rule Changes</h3>
-                            <p class="text-gray-600 text-base mb-4">New HMRC data reveals a massive 51% surge in SEIS funding for the 23/24 tax year, showing an immediate and powerful investor response to increased investment limits.</p>
-                            <a href="article-seis-skyrockets.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
 
-                    <!-- Article 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
-                        <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Abstract technology network representing the UK's tech landscape">
-                        <div class="p-6">
-                            <div class="flex items-center mb-2">
-                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> May 25, 2025</span>
-                                <span class="text-sm text-blue-600 font-semibold"><i class="fas fa-tag mr-1"></i> EIS</span>
+                    <!-- EIS Landscape Article -->
+                    <div class="insight-card" data-category="eis tech" data-keywords="eis landscape tech sector investment funding capital verticals">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Abstract technology network representing the UK's tech landscape">
+                        <div class="insight-content">
+                            <span class="insight-category">EIS</span>
+                            <h3 class="insight-title">Navigating the 2025 EIS Landscape: Why Tech Still Leads</h3>
+                            <p class="insight-excerpt">Despite a 20% dip in overall EIS funding, the tech sector remains the dominant force, attracting nearly half of all investment. Discover the key verticals drawing capital.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> May 25, 2025</span>
+                                <a href="article-eis-landscape.html" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                             </div>
-                            <h3 class="font-bold text-xl mb-2">Navigating the 2025 EIS Landscape: Why Tech Still Leads</h3>
-                            <p class="text-gray-600 text-base mb-4">Despite a 20% dip in overall EIS funding, the tech sector remains the dominant force, attracting nearly half of all investment. Discover the key verticals drawing capital.</p>
-                             <a href="article-eis-landscape.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
 
-                    <!-- Article 3 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
-                        <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" alt="Business professionals looking at charts on a screen">
-                        <div class="p-6">
-                            <div class="flex items-center mb-2">
-                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> May 22, 2025</span>
-                                <span class="text-sm text-red-600 font-semibold"><i class="fas fa-tag mr-1"></i> Market Analysis</span>
+                    <!-- Market Analysis Article -->
+                    <div class="insight-card" data-category="market-analysis venture" data-keywords="venture capital uk market interest rates economic uncertainty investment environment">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" alt="Business professionals looking at charts on a screen">
+                        <div class="insight-content">
+                            <span class="insight-category">Market Analysis</span>
+                            <h3 class="insight-title">A Sober Look at UK Venture Capital in 2025</h3>
+                            <p class="insight-excerpt">While SEIS thrives, the broader venture market faces headwinds. Higher interest rates and economic uncertainty are creating a more cautious investment environment.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> May 22, 2025</span>
+                                <a href="article-market-analysis-2025.html" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                             </div>
-                            <h3 class="font-bold text-xl mb-2">A Sober Look at UK Venture Capital in 2025</h3>
-                            <p class="text-gray-600 text-base mb-4">While SEIS thrives, the broader venture market faces headwinds. Higher interest rates and economic uncertainty are creating a more cautious investment environment.</p>
-                            <a href="article-market-analysis-2025.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
                     
-                    <!-- Article 4 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md card">
-                        <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?q=80&w=2070&auto=format&fit=crop" alt="Abstract 3D render of financial data analysis and charts">
-                        <div class="p-6">
-                            <div class="flex items-center mb-2">
-                                <span class="text-sm text-gray-500 mr-4"><i class="far fa-calendar-alt mr-1"></i> June 16, 2025</span>
-                                <span class="text-sm text-green-600 font-semibold"><i class="fas fa-tag mr-1"></i> FinTech</span>
+                    <!-- FinTech Investment Article -->
+                    <div class="insight-card" data-category="fintech investment" data-keywords="fintech uk investment quality quantity funding scale-ups profitability">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?q=80&w=2070&auto=format&fit=crop" alt="Abstract 3D render of financial data analysis and charts">
+                        <div class="insight-content">
+                            <span class="insight-category">FinTech</span>
+                            <h3 class="insight-title">Quality Over Quantity: The New Face of UK FinTech Investment</h3>
+                            <p class="insight-excerpt">While total funding has dipped, the UK FinTech sector is maturing. Investors are now making fewer, larger bets on established scale-ups with clear paths to profitability.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> June 16, 2025</span>
+                                <a href="article-fintech-investment.html" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                             </div>
-                            <h3 class="font-bold text-xl mb-2">Quality Over Quantity: The New Face of UK FinTech Investment</h3>
-                            <p class="text-gray-600 text-base mb-4">While total funding has dipped, the UK FinTech sector is maturing. Investors are now making fewer, larger bets on established scale-ups with clear paths to profitability.</p>
-                            <a href="article-fintech-investment.html" class="font-semibold text-teal-600 hover:text-teal-700 transition">Read More <i class="fas fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
 
-                    <!-- Placeholder 1 -->
-                    <div class="bg-gray-100 rounded-lg shadow-md flex items-center justify-center h-full min-h-[400px] border-2 border-dashed">
-                        <div class="text-center text-gray-400">
-                            <i class="fas fa-plus-circle text-4xl mb-2"></i>
-                            <p class="font-semibold">More Insights Coming Soon</p>
+                    <!-- FinTech Investment Record Article -->
+                    <div class="insight-card" data-category="fintech investment" data-keywords="fintech investment record high market volatility ai powered financial services uk startups">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop" alt="Fintech">
+                        <div class="insight-content">
+                            <span class="insight-category">FinTech</span>
+                            <h3 class="insight-title">Fintech Investment Hits Record High Despite Market Volatility</h3>
+                            <p class="insight-excerpt">UK fintech startups raised £8.2 billion in the first half of 2025, with AI-powered financial services leading the charge.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> May 30, 2025</span>
+                                <a href="#" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
                         </div>
                     </div>
-                    
-                    <!-- Placeholder 2 -->
-                    <div class="bg-gray-100 rounded-lg shadow-md flex items-center justify-center h-full min-h-[400px] border-2 border-dashed">
-                        <div class="text-center text-gray-400">
-                            <i class="fas fa-plus-circle text-4xl mb-2"></i>
-                            <p class="font-semibold">More Insights Coming Soon</p>
+
+                    <!-- CleanTech Funding Article -->
+                    <div class="insight-card" data-category="cleantech esg" data-keywords="cleantech startups climate funding esg investors carbon solutions renewable energy">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop" alt="Solar panels">
+                        <div class="insight-content">
+                            <span class="insight-category">CleanTech</span>
+                            <h3 class="insight-title">UK CleanTech Startups Secure £2.1B in Climate-Focused Funding</h3>
+                            <p class="insight-excerpt">ESG-focused investors are pouring capital into innovative climate solutions as the UK races toward net-zero targets.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> May 26, 2025</span>
+                                <a href="#" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HealthTech AI Diagnostics Article -->
+                    <div class="insight-card" data-category="healthtech ai" data-keywords="ai diagnostics healthtech cancer detection mediscan ai startup breakthrough technology">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop" alt="Medical technology">
+                        <div class="insight-content">
+                            <span class="insight-category">HealthTech</span>
+                            <h3 class="insight-title">AI Diagnostics Startup Revolutionizes Early Cancer Detection</h3>
+                            <p class="insight-excerpt">MediScan AI's breakthrough technology can detect multiple cancer types with 95% accuracy, securing £50M Series B funding.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> May 29, 2025</span>
+                                <a href="#" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Blockchain Solutions Article -->
+                    <div class="insight-card" data-category="fintech blockchain" data-keywords="blockchain solutions fintech quantum resistant encryption future blockchain startup seed funding">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1644361567968-b4b41ba08660?q=80&w=2070&auto=format&fit=crop" alt="Blockchain technology">
+                        <div class="insight-content">
+                            <span class="insight-category">FinTech</span>
+                            <h3 class="insight-title">Future Blockchain Solutions Raises £12M Seed for Quantum-Resistant Tech</h3>
+                            <p class="insight-excerpt">London-based startup develops next-generation blockchain infrastructure designed to withstand quantum computing threats.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> June 2, 2025</span>
+                                <a href="#" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GreenTech Innovation Article -->
+                    <div class="insight-card" data-category="cleantech greentech" data-keywords="greentech innovation carbon capture atmospheric solutions climate technology venture capital">
+                        <img class="insight-image" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop" alt="Green technology">
+                        <div class="insight-content">
+                            <span class="insight-category">GreenTech</span>
+                            <h3 class="insight-title">GreenTech Innovation: From Lab to Market in Record Time</h3>
+                            <p class="insight-excerpt">AtmoCapture's revolutionary carbon capture technology moves from university research to commercial deployment in just 18 months.</p>
+                            <div class="insight-meta">
+                                <span class="insight-date"><i class="far fa-calendar-alt mr-1"></i> June 1, 2025</span>
+                                <a href="#" class="insight-read-more">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -193,5 +463,97 @@
     <!-- Footer will be injected by footer.js -->
     <script src="js/main.js"></script>
     <script src="components/footer.js"></script>
+    
+    <script>
+        // Search and Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const filterTags = document.querySelectorAll('.filter-tag');
+            const insightCards = document.querySelectorAll('.insight-card');
+            
+            let currentFilter = 'all';
+            let currentSearchTerm = '';
+            
+            // Search functionality
+            searchInput.addEventListener('input', function(e) {
+                currentSearchTerm = e.target.value.toLowerCase();
+                filterInsights();
+            });
+            
+            // Filter functionality
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Remove active class from all tags
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tag
+                    this.classList.add('active');
+                    
+                    currentFilter = this.getAttribute('data-filter');
+                    filterInsights();
+                });
+            });
+            
+            function filterInsights() {
+                insightCards.forEach(card => {
+                    const category = card.getAttribute('data-category').toLowerCase();
+                    const keywords = card.getAttribute('data-keywords').toLowerCase();
+                    const title = card.querySelector('.insight-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.insight-excerpt').textContent.toLowerCase();
+                    
+                    // Check if card matches current filter
+                    const matchesFilter = currentFilter === 'all' || 
+                                        category.includes(currentFilter) ||
+                                        keywords.includes(currentFilter);
+                    
+                    // Check if card matches search term
+                    const matchesSearch = currentSearchTerm === '' ||
+                                        title.includes(currentSearchTerm) ||
+                                        excerpt.includes(currentSearchTerm) ||
+                                        keywords.includes(currentSearchTerm) ||
+                                        category.includes(currentSearchTerm);
+                    
+                    // Show/hide card based on filter and search
+                    if (matchesFilter && matchesSearch) {
+                        card.style.display = 'block';
+                        // Add fade-in animation
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.transition = 'all 0.3s ease';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show "No results" message if no cards are visible
+                const visibleCards = Array.from(insightCards).filter(card => 
+                    card.style.display !== 'none'
+                );
+                
+                // Remove existing no-results message
+                const existingMessage = document.getElementById('no-results-message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+                
+                if (visibleCards.length === 0) {
+                    const noResultsMessage = document.createElement('div');
+                    noResultsMessage.id = 'no-results-message';
+                    noResultsMessage.className = 'col-span-full text-center py-12';
+                    noResultsMessage.innerHTML = `
+                        <div class="text-gray-400">
+                            <i class="fas fa-search text-4xl mb-4"></i>
+                            <p class="text-lg font-semibold mb-2">No insights found</p>
+                            <p class="text-sm">Try adjusting your search terms or filters</p>
+                        </div>
+                    `;
+                    document.getElementById('insightsGrid').appendChild(noResultsMessage);
+                }
+            }
+        });
+    </script>
 </body>
 </html> 
