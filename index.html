@@ -442,6 +442,95 @@
                 opacity: 1;
             }
         }
+
+        /* Enhanced news section styling */
+        .news-section {
+            background: linear-gradient(135deg, var(--lightest-blue) 0%, #f8faff 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .news-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
+        }
+
+        .news-section-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            border-radius: 2px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e3f2fd;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+            border-color: var(--light-blue);
+        }
+
+        .category-badge {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .read-more-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .read-more-link:hover {
+            color: var(--dark-blue);
+            transform: translateX(3px);
+        }
+
+        .read-more-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-link:hover i {
+            transform: translateX(3px);
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -498,7 +587,7 @@
                              x-transition:leave-end="opacity-0 transform scale-95" 
                              class="absolute left-0 mt-2 w-56 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 z-50 border border-gray-100">
                             <div class="py-2">
-                                <a href="#" class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-gray-900 transition-all duration-200">
+                                <a href="innovators.html" class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-gray-900 transition-all duration-200">
                                     <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors duration-200">
                                         <i class="fas fa-lightbulb text-blue-600 text-sm"></i>
                                     </div>
@@ -507,7 +596,7 @@
                                         <div class="text-xs text-gray-500">For entrepreneurs</div>
                                     </div>
                                 </a>
-                                <a href="#" class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-gray-900 transition-all duration-200">
+                                <a href="investors.html" class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50 hover:text-gray-900 transition-all duration-200">
                                     <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center mr-3 group-hover:bg-teal-200 transition-colors duration-200">
                                         <i class="fas fa-coins text-teal-600 text-sm"></i>
                                     </div>
@@ -551,13 +640,13 @@
                         <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200" :class="{'rotate-180': communityOpen}"></i>
                     </button>
                     <div x-show="communityOpen" x-transition class="ml-4 mt-3 space-y-3 bg-gray-800 bg-opacity-50 rounded-lg p-3">
-                        <a href="#" class="group flex items-center py-2 text-gray-300 hover:text-white transition-colors duration-200" @click="open = false">
+                        <a href="innovators.html" class="group flex items-center py-2 text-gray-300 hover:text-white transition-colors duration-200" @click="open = false">
                             <div class="w-6 h-6 bg-blue-600 bg-opacity-20 rounded-full flex items-center justify-center mr-3 group-hover:bg-opacity-40 transition-all duration-200">
                                 <i class="fas fa-lightbulb text-blue-400 text-xs"></i>
                             </div>
                             <span class="text-sm font-medium">Innovators</span>
                         </a>
-                        <a href="#" class="group flex items-center py-2 text-gray-300 hover:text-white transition-colors duration-200" @click="open = false">
+                        <a href="investors.html" class="group flex items-center py-2 text-gray-300 hover:text-white transition-colors duration-200" @click="open = false">
                             <div class="w-6 h-6 bg-teal-600 bg-opacity-20 rounded-full flex items-center justify-center mr-3 group-hover:bg-opacity-40 transition-all duration-200">
                                 <i class="fas fa-coins text-teal-400 text-xs"></i>
                             </div>
@@ -642,32 +731,32 @@
             </div>
 
             <!-- Section: Fintech -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-gray-200 pb-2">Fintech</h3>
+            <div class="news-section">
+                <h3 class="text-2xl font-bold news-section-header">Fintech</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Fintech Article 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop" alt="Fintech">
                         <div class="p-5">
-                            <span class="text-xs text-purple-600 font-bold uppercase tracking-wider">FINTECH</span>
+                            <span class="category-badge">FINTECH</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">Fintech Investment Hits Record High Despite Market Volatility</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">UK fintech startups raised £8.2 billion in the first half of 2025, with AI-powered financial services leading the charge.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 30, 2025</span>
-                                <a href="article-fintech-investment.html" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="article-fintech-investment.html" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <!-- Fintech Article 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=2071&auto=format&fit=crop" alt="Digital payment">
                         <div class="p-5">
-                            <span class="text-xs text-purple-600 font-bold uppercase tracking-wider">FINTECH</span>
+                            <span class="category-badge">FINTECH</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">Open Banking 2.0: The Next Wave of Financial Innovation</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">New regulations set to launch in Q3 2025 will enable unprecedented data sharing capabilities.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 28, 2025</span>
-                                <a href="#" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="#" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -684,32 +773,32 @@
             </div>
 
             <!-- Section: ESG (CleanTech) -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-gray-200 pb-2">ESG (CleanTech)</h3>
+            <div class="news-section">
+                <h3 class="text-2xl font-bold news-section-header">ESG (CleanTech)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- ESG Article 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop" alt="Solar panels">
                         <div class="p-5">
-                            <span class="text-xs text-green-600 font-bold uppercase tracking-wider">CLEANTECH</span>
+                            <span class="category-badge">CLEANTECH</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">UK CleanTech Startups Secure £2.1B in Climate-Focused Funding</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">ESG-focused investors are pouring capital into innovative climate solutions.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 26, 2025</span>
-                                <a href="#" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="#" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <!-- ESG Article 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=2074&auto=format&fit=crop" alt="Wind turbines">
                         <div class="p-5">
-                            <span class="text-xs text-green-600 font-bold uppercase tracking-wider">CLEANTECH</span>
+                            <span class="category-badge">CLEANTECH</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">AI-Powered Energy Management Startup Raises £45M Series B</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">GridOptima's AI platform promises to reduce commercial energy consumption by up to 40%.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 24, 2025</span>
-                                <a href="#" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="#" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -726,32 +815,32 @@
             </div>
 
             <!-- Section: Health Tech -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-gray-200 pb-2">Health Tech</h3>
+            <div class="news-section">
+                <h3 class="text-2xl font-bold news-section-header">Health Tech</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Health Tech Article 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop" alt="Medical technology">
                         <div class="p-5">
-                            <span class="text-xs text-red-600 font-bold uppercase tracking-wider">HEALTH TECH</span>
+                            <span class="category-badge">HEALTH TECH</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">AI Diagnostics Startup Revolutionizes Early Cancer Detection</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">MediScan AI's breakthrough technology can detect multiple cancer types with 95% accuracy.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 29, 2025</span>
-                                <a href="#" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="#" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <!-- Health Tech Article 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=2069&auto=format&fit=crop" alt="Digital health">
                         <div class="p-5">
-                            <span class="text-xs text-red-600 font-bold uppercase tracking-wider">HEALTH TECH</span>
+                            <span class="category-badge">HEALTH TECH</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">Mental Health Tech Platform Expands with £35M Investment</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">MindfulAI's personalized therapy platform sees 300% growth in user adoption.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 23, 2025</span>
-                                <a href="#" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="#" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -768,32 +857,32 @@
             </div>
 
             <!-- Section: Policy -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-gray-200 pb-2">Policy</h3>
+            <div class="news-section">
+                <h3 class="text-2xl font-bold news-section-header">Policy</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Policy Article 1 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://c.pxhere.com/images/56/ba/951725629e801f44c6938c1aa4a3-1584335.jpg!d" alt="Financial growth">
                         <div class="p-5">
-                            <span class="text-xs text-indigo-600 font-bold uppercase tracking-wider">POLICY</span>
+                            <span class="category-badge">POLICY</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">SEIS Investment Skyrockets 51% After Rule Changes</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">New HMRC data reveals a massive surge in SEIS funding for the 23/24 tax year.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 28, 2025</span>
-                                <a href="article-seis-skyrockets.html" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="article-seis-skyrockets.html" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <!-- Policy Article 2 -->
-                    <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                    <div class="news-card">
                         <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop" alt="Government building">
                         <div class="p-5">
-                            <span class="text-xs text-indigo-600 font-bold uppercase tracking-wider">POLICY</span>
+                            <span class="category-badge">POLICY</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-2 mb-2 line-clamp-2">UK Government Announces New AI Regulatory Framework</h4>
                             <p class="text-gray-600 text-sm mb-3 line-clamp-3">The long-awaited AI Act UK introduces comprehensive guidelines for AI development.</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-xs text-gray-500">May 21, 2025</span>
-                                <a href="#" class="text-teal-600 text-sm font-semibold hover:text-teal-700">Read More →</a>
+                                <a href="#" class="read-more-link text-sm">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
