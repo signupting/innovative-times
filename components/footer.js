@@ -10,19 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="text-gray-400 text-base">
                         Your trusted source for EIS and SEIS investment insights and opportunities.
                     </p>
-                    <div class="mt-4 flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-linkedin text-lg"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-twitter text-lg"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-facebook text-lg"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-instagram text-lg"></i>
-                        </a>
+                    <div class="mt-4">
+                        <p class="text-gray-400 text-sm">
+                            Follow us for the latest EIS and investment insights
+                        </p>
                     </div>
                 </div>
 
