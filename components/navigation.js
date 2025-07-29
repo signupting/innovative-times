@@ -67,8 +67,27 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
         
+        <!-- Mobile Navigation Backdrop -->
+        <div x-show="open" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             @click="open = false"
+             class="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+        
         <!-- Mobile Navigation -->
-        <div x-show="open" class="md:hidden mobile-menu" :class="{'active': open}" @click.away="open = false">
+        <div x-show="open" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="transform -translate-x-full"
+             x-transition:enter-end="transform translate-x-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="transform translate-x-0"
+             x-transition:leave-end="transform -translate-x-full"
+             class="md:hidden mobile-menu" 
+             :class="{'active': open}">
             <div class="flex justify-end mb-8">
                 <button @click="open = false" class="focus:outline-none">
                     <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

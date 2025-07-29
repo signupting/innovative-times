@@ -73,7 +73,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #1E40AF;
+    width: 100%;
+    background: linear-gradient(135deg, #203F58 0%, #1a3447 100%);
     z-index: 50;
     display: flex;
     flex-direction: column;

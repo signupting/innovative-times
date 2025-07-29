@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <li><a href="index.html" class="text-gray-400 hover:text-white transition text-base">Home</a></li>
                         <li><a href="about.html" class="text-gray-400 hover:text-white transition text-base">About</a></li>
                         <li><a href="eis-explained.html" class="text-gray-400 hover:text-white transition text-base">What is EIS</a></li>
-                        <li><a href="community.html" class="text-gray-400 hover:text-white transition text-base">Community</a></li>
+                        <li><a href="innovators.html" class="text-gray-400 hover:text-white transition text-base">Innovators</a></li>
+                        <li><a href="investors.html" class="text-gray-400 hover:text-white transition text-base">Investors</a></li>
                         <li><a href="insights.html" class="text-gray-400 hover:text-white transition text-base">Insights</a></li>
                         <li><a href="contact.html" class="text-gray-400 hover:text-white transition text-base">Contact</a></li>
                     </ul>

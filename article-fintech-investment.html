@@ -36,8 +36,25 @@
         .nav-link { position: relative; transition: all 0.3s ease; color: white; }
         .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: linear-gradient(to right, var(--primary-blue), var(--light-blue)); transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }
-        .mobile-menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #1E40AF; z-index: 50; display: flex; flex-direction: column; padding: 2rem; transform: translateX(-100%); transition: transform 0.3s ease; }
-        .mobile-menu.active { transform: translateX(0); }
+                    .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #203F58 0%, #1a3447 100%);
+                z-index: 50;
+                display: flex;
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
     </style>
 </head>
 <body class="bg-gray-100 preloader">
@@ -46,14 +63,22 @@
     <header class="header-nav py-4" x-data="{ open: false }">
         <div class="container mx-auto px-4 md:px-8">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center">
-                    <h1 class="text-2xl md:text-3xl font-bold text-white">
+                <!-- Mobile Menu Button (left on mobile) -->
+                <button @click="open = !open" class="md:hidden focus:outline-none order-1">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                
+                <!-- Logo (centered on desktop, right on mobile) -->
+                <div class="flex items-center order-2 md:order-1">
+                    <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">
                         <span>The Innovative Times</span>
                     </h1>
-                </a>
+                </div>
                 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
+                <nav class="desktop-nav order-3 md:order-2">
                     <a href="index.html" class="nav-link font-medium">Home</a>
                     <a href="about.html" class="nav-link">About</a>
                     <a href="eis-explained.html" class="nav-link">What is EIS</a>
@@ -62,10 +87,7 @@
                     <a href="ino-times.html#contact" class="nav-link font-medium">Contact</a>
                 </nav>
                 
-                <!-- Mobile Menu Button -->
-                <button @click="open = !open" class="md:hidden focus:outline-none">
-                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
+                
             </div>
         </div>
         
